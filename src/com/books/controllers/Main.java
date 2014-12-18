@@ -14,14 +14,14 @@ public class Main {
 System.out.println("Debut");
 		
 		Session sess = HibernateUtil.getSessionFactory().openSession();
-		/*Transaction t = sess.beginTransaction();
+		Transaction t = sess.beginTransaction();
 		
 		User usr = new User("hellomyfriend");
 		usr.setAccountStatus(true);
 		usr.setName("Patrick");
 		sess.save(usr);
 		
-		t.commit();*/
+		t.commit();
 		
 		//Pers result = (Pers) sess.get("Pers", "hello");
 		

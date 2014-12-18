@@ -10,6 +10,9 @@
 	<link href="index.css" rel="stylesheet">
   </head>
   <body>
+  <%
+  	User u = (User) request.getSession().getAttribute("user");
+  %>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -17,7 +20,7 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="find_books.html">Find a book</a></li>
-				<li><a href="reader_books.html">My books</a></li>
+				<li><a href="BooksController?page=0">My books</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="logout.jsp">Déconnexion</a></li>
@@ -26,14 +29,14 @@
 	</div>
 	<div class="container">
 	<header class="page-header">
-		<h1>Bonjour, <%=((User)request.getAttribute("user")).getName()%> </h1>
+		<h1>Bonjour, <%=u.getName()%> </h1>
 	</header>
 	</div>
 	<div class="col-lg-offset-3 col-lg-8">
-	<p>email : <%=((User)request.getAttribute("user")).getEmail()%></p>
-	<p>Adresse : <%=((User)request.getAttribute("user")).getAddress()%></p>
-	<p>Password : <%=((User)request.getAttribute("user")).getPwd()%></p>
-	<p>Role : <%=((User)request.getAttribute("user")).getIsAdmin()?"Admin":"User"%></p>
+	<p>email : <%=u.getEmail()%></p>
+	<p>Adresse : <%=u.getAddress()%></p>
+	<p>Password : <%=u.getPwd()%></p>
+	<p>Role : <%=u.getIsAdmin()?"Admin":"User"%></p>
 	</div>
 	
 	<script src="bootstrap/js/jquery-2.1.1.min.js"></script>

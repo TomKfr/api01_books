@@ -1,6 +1,7 @@
 package com.books.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,19 +13,19 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import com.books.hibernate.HibernateUtil;
-import com.books.model.User;
+import com.books.model.Books;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class BooksController
  */
-@WebServlet({ "/LoginController", "/index" })
-public class LoginController extends HttpServlet {
+@WebServlet("/BooksController")
+public class BooksController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public BooksController() {
         super();
     }
 
@@ -32,42 +33,39 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String log = request.getParameter("login");
-		String pass = request.getParameter("pwd");
-		User u = new User();
 		
+		Integer nbpages = (Integer) request.getAttribute("nbpages"); 
+		Integer  pagination = Integer.parseInt(request.getParameter("page"));
+		if(pagination==null) pagination = 2;
+			
 		Session sess = HibernateUtil.getSessionFactory().openSession();
-		
+		List<Books> res = null;
 		try{
-			u = (User) sess.get("com.books.model.User", log);
-		} 
-		catch (HibernateException he) {
-			System.out.println("login non trouvé : "+ he);
+			res = sess.createCriteria("com.books.model.Books").list();
+		}
+		catch (HibernateException he){
+			System.out.println("echec recup bouquins "+ he);
+		}
+		
+		if(nbpages==null) nbpages = Math.round(res.size()/20);
+		request.setAttribute("nbpages", nbpages);
+		request.setAttribute("page", pagination);
+		
+		if(!res.isEmpty()){
+			if(pagination!=nbpages){
+				request.setAttribute("books", res.subList(pagination*20, pagination*20+19));
+			}
+			else{
+				System.out.println("blop");
+				request.setAttribute("books", res.subList(pagination*20, res.size()-1));
+			}
+			request.getRequestDispatcher("user/reader_books.jsp").forward(request, response);
+		}
+		else{
+			System.out.println("pas de livres");
 		}
 		
 		sess.close();
-		
-		if(u!=null){
-			if(u.getPwd().compareTo(pass)==0){
-				if(u.getIsAdmin()){
-					request.getSession().setAttribute("user", u);
-					request.getRequestDispatcher("admin/admin_index.jsp").forward(request, response);
-				}
-				else{
-					request.getSession().setAttribute("user", u);
-					request.setAttribute("action", "load");
-					request.getRequestDispatcher("user/reader_index.jsp").forward(request, response);
-				}
-			}
-			else{
-				request.setAttribute("result", "fail");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
-			}
-		}
-		else{
-			request.setAttribute("result", "fail");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-		}
 	}
 
 	/**
