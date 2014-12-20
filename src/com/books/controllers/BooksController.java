@@ -14,6 +14,7 @@ import org.hibernate.Session;
 
 import com.books.hibernate.HibernateUtil;
 import com.books.model.Books;
+import com.books.model.User;
 
 /**
  * Servlet implementation class BooksController
@@ -36,12 +37,17 @@ public class BooksController extends HttpServlet {
 		
 		Integer nbpages = (Integer) request.getAttribute("nbpages"); 
 		Integer  pagination = Integer.parseInt(request.getParameter("page"));
+		User u = (User) request.getSession().getAttribute("user");
 		if(pagination==null) pagination = 2;
-			
+		
 		Session sess = HibernateUtil.getSessionFactory().openSession();
+		
 		List<Books> res = null;
 		try{
-			res = sess.createCriteria("com.books.model.Books").list();
+			//res = sess.createCriteria("com.books.model.Books").list();
+			res = sess.createQuery("select books from com.books.model.Books as books, com.books.model.Evaluation eval, com.books.model.User as user where books.isbn=eval.book and eval.user= :mail")
+					.setString("mail", u.getEmail())
+					.list();
 		}
 		catch (HibernateException he){
 			System.out.println("echec recup bouquins "+ he);
@@ -50,6 +56,7 @@ public class BooksController extends HttpServlet {
 		if(nbpages==null) nbpages = Math.round(res.size()/20);
 		request.setAttribute("nbpages", nbpages);
 		request.setAttribute("page", pagination);
+		System.out.println("num page : "+pagination);
 		
 		if(!res.isEmpty()){
 			if(pagination!=nbpages){
@@ -63,6 +70,7 @@ public class BooksController extends HttpServlet {
 		}
 		else{
 			System.out.println("pas de livres");
+			request.getRequestDispatcher("user/reader_books.jsp").forward(request, response);
 		}
 		
 		sess.close();

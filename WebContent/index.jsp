@@ -22,10 +22,6 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="index.html">Mon beau site</a>
 			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="reader_index.html">Reader_index</a></li>
-				<li><a href="administrator_index.html">Admin_index</a></li>
-			</ul>
 		</div>
 	</div>
 	<div class="container">
