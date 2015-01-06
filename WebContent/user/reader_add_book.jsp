@@ -24,14 +24,14 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="../logout.jsp">Mon beau site</a>
+				<a class="navbar-brand" href="LoginController?action=logout">Mon beau site</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li  class="active"><a href="#">Find a book</a></li>
-				<li><a href="../BooksController?action=list&page=0">My books</a></li>
+				<li><a href="${pageContext.request.contextPath}/BooksController?action=list&page=0">My books</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="./logout.jsp">Déconnexion</a></li>
+				<li><a href="LoginController?action=logout">Déconnexion</a></li>
 			</ul>
 		</div>
 	</div>
@@ -44,7 +44,7 @@
 		<div class="col-lg-6">
 			<div class="col-lg-12">
 				<h2>Rechercher des livres</h2>
-				<form method="get" action="../EvalManager" class="col-lg-offset-3 col-lg-6">
+				<form method="get" action="${pageContext.request.contextPath}/EvalManager" class="col-lg-offset-3 col-lg-6">
 					<div class="form-group">
 						<label for="isbn">ISBN</label>
 						<input type="text" class="form-control" id="isbn" placeholder="ISBN" name="isbn">

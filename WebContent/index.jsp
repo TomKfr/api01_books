@@ -48,14 +48,6 @@
 				</div>
 			</form>
 		</div>
-		<div class="row">
-			<div class="col-md-offset-4 col-md-4">
-				<p>Pas de compte ? C'est par ici  <span class="glyphicon glyphicon-arrow-right"></span>  
-				<a class="btn btn-primary" href="signin.html">S'inscrire</a>
-				<label>${pageContext.request.contextPath}</label>
-				</p>
-			</div>
-		</div>
     </div>
     <script src="bootstrap/js/jquery-2.1.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>

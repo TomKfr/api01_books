@@ -71,12 +71,22 @@ public class EvalManager extends HttpServlet {
 			}
 			request.setAttribute("books", list);
 			System.out.println("forwarding ...");
-			request.getRequestDispatcher("./user/reader_add_book.jsp").forward(request, response);
+			request.getRequestDispatcher("/user/reader_add_book.jsp").forward(request, response);
 		}
 		if(request.getParameter("action").equals("add")){
 			
+			String isbn = request.getParameter("isbn");
+			sess.beginTransaction();
+			
+			Books bk = (Books) sess.get("com.books.model.Books", isbn);
+			System.out.println("Evaluation du bouquin : "+bk.getTitre());
+			
+			sess.getTransaction().commit();
+			
+			request.setAttribute("book", bk);
+			
 			System.out.println("forwarding ...");
-			request.getRequestDispatcher("reader_add_book.jsp").forward(request, response);
+			request.getRequestDispatcher("/user/reader_add_eval.jsp").forward(request, response);
 		}
 	}
 
