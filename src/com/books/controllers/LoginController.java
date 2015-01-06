@@ -32,41 +32,50 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String log = request.getParameter("login");
-		String pass = request.getParameter("pwd");
-		User u = new User();
 		
-		Session sess = HibernateUtil.getSessionFactory().openSession();
-		
-		try{
-			u = (User) sess.get("com.books.model.User", log);
-		} 
-		catch (HibernateException he) {
-			System.out.println("login non trouvé : "+ he);
+		if(request.getParameter("action")!=null){
+			System.out.println("déconnexion ...");
+			request.getSession().setAttribute("user", null);
+			
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
-		
-		sess.close();
-		
-		if(u!=null){
-			if(u.getPwd().compareTo(pass)==0){
-				if(u.getIsAdmin()){
-					request.getSession().setAttribute("user", u);
-					request.getRequestDispatcher("admin/admin_index.jsp").forward(request, response);
+		else{
+			String log = request.getParameter("login");
+			String pass = request.getParameter("pwd");
+			User u = new User();
+			
+			Session sess = HibernateUtil.getSessionFactory().openSession();
+			
+			try{
+				u = (User) sess.get("com.books.model.User", log);
+			} 
+			catch (HibernateException he) {
+				System.out.println("login non trouvé : "+ he);
+			}
+			
+			sess.close();
+			
+			if(u!=null){
+				if(u.getPwd().compareTo(pass)==0){
+					if(u.getIsAdmin()){
+						request.getSession().setAttribute("user", u);
+						request.getRequestDispatcher("admin/admin_index.jsp").forward(request, response);
+					}
+					else{
+						request.getSession().setAttribute("user", u);
+						request.setAttribute("action", "load");
+						request.getRequestDispatcher("user/reader_index.jsp").forward(request, response);
+					}
 				}
 				else{
-					request.getSession().setAttribute("user", u);
-					request.setAttribute("action", "load");
-					request.getRequestDispatcher("user/reader_index.jsp").forward(request, response);
+					request.setAttribute("result", "fail");
+					request.getRequestDispatcher("index.jsp").forward(request, response);
 				}
 			}
 			else{
 				request.setAttribute("result", "fail");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
-		}
-		else{
-			request.setAttribute("result", "fail");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 
