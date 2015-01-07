@@ -143,6 +143,21 @@ public class UserManager extends HttpServlet {
 			request.getRequestDispatcher("./admin/user_mgmt.jsp").forward(request, response);
 		}
 		
+		if(action.equals("view")){
+			
+			Session sess = HibernateUtil.getSessionFactory().openSession();
+			String email = request.getParameter("email");
+			
+			User usr = (User) sess.get(User.class, email);
+			//Ajouter la récupération des evals et des matchs pour cet user
+			
+			sess.close();
+			
+			request.setAttribute("vieweduser", usr);
+			
+			request.getRequestDispatcher("./admin/admin_view_user.jsp").forward(request, response);			
+		}
+		
 		if(action.equals("index")){
 			request.getRequestDispatcher("./admin/user_mgmt.jsp").forward(request, response);
 		}

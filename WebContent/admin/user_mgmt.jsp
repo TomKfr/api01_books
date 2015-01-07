@@ -124,7 +124,8 @@
 						while(it.hasNext()){
 							User u = (User) it.next();
 							out.println("<tr><td>"+u.getEmail()+"</td><td>"+u.getName()+"</td><td>"+u.getPwd()+"</td><td>"+u.getAddress()+"</td><td>"+u.getTel()+"</td><td>"+u.getCreationDate()+"</td><td>"+u.getAccountStatus()+"</td><td>"+u.getIsAdmin()+"</td>");
-							out.println("<td><a class='btn btn-info' href='UserManager?action=startmodif&email="+u.getEmail()+"'>Modifier</a>");
+							out.println("<td><a class='btn btn-success' href='UserManager?action=view&email="+u.getEmail()+"'>Visualiser</a>");
+							out.println("<a class='btn btn-info' href='UserManager?action=startmodif&email="+u.getEmail()+"'>Modifier</a>");
 							out.println("<a class='btn btn-danger' href='UserManager?action=delete&email="+u.getEmail()+"'>Supprimer</a></td></tr>");
 						}
 						out.println("</table>");
