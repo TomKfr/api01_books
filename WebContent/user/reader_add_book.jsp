@@ -37,11 +37,36 @@
 	</div>
 	<div class="container">
 	<header class="page-header">
-		<h1>Ajouter une éval pour <%=u.getName()%> :</h1>
+		<h1>Ajouter une évaluation pour <%=u.getName()%> :</h1>
 	</header>
 	</div>
 	<div class="col-lg-12">
 		<div class="col-lg-6">
+			<div class="col-lg-12">
+				<h2>Votre livre n'existe pas ?</h2>
+				<form method="get" action="${pageContext.request.contextPath}/BooksController" class="col-lg-offset-4 col-lg-6">
+					<div class="form-group">
+						<label for="isbn">ISBN</label>
+						<input type="text" class="form-control" id="isbn" placeholder="ISBN" name="isbn">
+					</div>
+					<div class="form-group">
+						<label for="titre">Titre</label>
+						<input type="text" class="form-control" id="titre" placeholder="Titre" name="titre">
+					</div>
+					<div class="form-group">
+						<label for="genre">Genre</label>
+						<input type="text" class="form-control" id="genre" placeholder="Genre" name="genre">
+					</div>
+					<div class="form-group">
+						<label for="auteur">Auteur</label>
+						<input type="text" class="form-control" id="auteur" placeholder="Auteur" name="auteur">
+					</div>
+					<input type="hidden" name="action" value="add"/>
+					<div class="col-lg-3">
+						<input type="submit" class="btn btn-primary" value="Ajouter">
+					</div>	
+				</form>
+			</div>
 			<div class="col-lg-12">
 				<h2>Rechercher des livres</h2>
 				<form method="get" action="${pageContext.request.contextPath}/EvalManager" class="col-lg-offset-3 col-lg-6">
