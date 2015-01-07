@@ -15,6 +15,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.books.hibernate.HibernateUtil;
 import com.books.model.Books;
+import com.books.model.Evaluation;
 import com.books.model.User;
 
 /**
@@ -79,7 +80,7 @@ public class EvalManager extends HttpServlet {
 			sess.beginTransaction();
 			
 			Books bk = (Books) sess.get("com.books.model.Books", isbn);
-			System.out.println("Evaluation du bouquin : "+bk.getTitre());
+			System.out.println("Evaluation du livre : "+bk.getTitre());
 			
 			sess.getTransaction().commit();
 			
@@ -87,6 +88,37 @@ public class EvalManager extends HttpServlet {
 			
 			System.out.println("forwarding ...");
 			request.getRequestDispatcher("/user/reader_add_eval.jsp").forward(request, response);
+		}
+		if(request.getParameter("action").equals("newEval")){
+			int q = Integer.parseInt(request.getParameter("quality"));
+			int s = Integer.parseInt(request.getParameter("subject"));
+			int d = Integer.parseInt(request.getParameter("desire"));
+			int ra = Integer.parseInt(request.getParameter("read_author"));
+			int r = Integer.parseInt(request.getParameter("recommend"));
+			double note= (double) (q+s+d+ra+r)/5;
+			
+			Evaluation eval=new Evaluation();
+			eval.setBook(request.getParameter("book"));
+			eval.setUser( u.getEmail());
+			eval.setQuality(q);
+			eval.setSubject(s);
+			eval.setDesire(d);
+			eval.setReadAuthor(ra);
+			eval.setRecommend(r);
+			eval.setScore(note);
+			if(request.getParameter("bouton").equals("Enregistrer")){
+				eval.setIsvalidated(false);
+			} else {
+				eval.setIsvalidated(true);
+			}
+		
+			sess.beginTransaction();
+			sess.saveOrUpdate(eval);
+			sess.getTransaction().commit();
+			
+			sess.close();
+			
+			request.getRequestDispatcher("EvalManager?action=search&isbn=").forward(request, response);
 		}
 	}
 
