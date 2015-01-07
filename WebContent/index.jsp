@@ -20,7 +20,7 @@
   	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="index.html">Mon beau site</a>
+				<a class="navbar-brand" href="LoginController?action=login">Mon beau site</a>
 			</div>
 		</div>
 	</div>
@@ -41,6 +41,7 @@
 					<input type="password" class="form-control" id="pwd" placeholder="password" name="pwd">
 				</div>
 				<div class="col-lg-3">
+					<input type="hidden" name="action" value="login">
 					<input type="submit" class="btn btn-primary" value="Log in">
 				</div>
 				<div class="col-lg-offset-1 col-lg-8 alert alert-danger" <%= result %>>

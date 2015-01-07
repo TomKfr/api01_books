@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import com.books.hibernate.HibernateUtil;
 import com.books.model.Books;
 import com.books.model.Evaluation;
 import com.books.model.User;
+import com.books.utilities.HibernateUtil;
 
 /**
  * Servlet implementation class EvalManager
@@ -41,7 +41,9 @@ public class EvalManager extends HttpServlet {
 		System.out.println("action = "+request.getParameter("action"));
 		Session sess = HibernateUtil.getSessionFactory().openSession();
 		
-		if(request.getParameter("action").equals("delete")){
+		String action = request.getParameter("action");
+		
+		if(action.equals("delete")){
 			System.out.println("email :"+u.getEmail());
 			System.out.println("isbn :"+request.getParameter("isbn"));
 			
@@ -55,7 +57,7 @@ public class EvalManager extends HttpServlet {
 			sess.close();
 			request.getRequestDispatcher("BooksController?action=list&page=0").forward(request, response);
 		}
-		if(request.getParameter("action").equals("search")){
+		if(action.equals("search")){
 			List<Books> list = new ArrayList<Books>();
 			
 			String isbn = request.getParameter("isbn");
@@ -74,7 +76,7 @@ public class EvalManager extends HttpServlet {
 			System.out.println("forwarding ...");
 			request.getRequestDispatcher("/user/reader_add_book.jsp").forward(request, response);
 		}
-		if(request.getParameter("action").equals("add")){
+		if(action.equals("add")){
 			
 			String isbn = request.getParameter("isbn");
 			sess.beginTransaction();
@@ -89,7 +91,17 @@ public class EvalManager extends HttpServlet {
 			System.out.println("forwarding ...");
 			request.getRequestDispatcher("/user/reader_add_eval.jsp").forward(request, response);
 		}
-		if(request.getParameter("action").equals("newEval")){
+		
+		if(action.equals("index")){
+			
+			List<Evaluation> list = new ArrayList<Evaluation>();
+			sess.createCriteria(Evaluation.class).list();
+			
+			request.setAttribute("evals", list);
+			request.getRequestDispatcher("./admin/admin_eval_mgmt.jsp").forward(request, response);
+		}
+
+		if(action.equals("newEval")){
 			int q = Integer.parseInt(request.getParameter("quality"));
 			int s = Integer.parseInt(request.getParameter("subject"));
 			int d = Integer.parseInt(request.getParameter("desire"));

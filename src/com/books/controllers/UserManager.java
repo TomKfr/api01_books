@@ -15,9 +15,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import com.books.hibernate.HibernateUtil;
-import com.books.model.Books;
 import com.books.model.User;
+import com.books.utilities.HibernateUtil;
+import com.books.utilities.MailUtil;
 
 /**
  * Servlet implementation class UserManager
@@ -61,6 +61,9 @@ public class UserManager extends HttpServlet {
 			
 			request.setAttribute("result", "success");
 			request.getRequestDispatcher("./admin/user_mgmt.jsp").forward(request, response);
+			
+			String message = "Bonjour "+u.getName()+",\nVotre compte a été créé/modifié. Voici vos informations de connexion :\nEmail :"+u.getEmail()+"\nMot de passe : "+u.getPwd()+"\nCordialement,\nAdmin.";
+			MailUtil.sendMessage("Notification de création de compte", message, u.getEmail(), "tkieffer67@gmail.com");
 		}
 		
 		if(action.equals("delete")){
@@ -95,10 +98,6 @@ public class UserManager extends HttpServlet {
 			request.setAttribute("modifuser", u);
 			
 			request.getRequestDispatcher("./admin/user_mgmt.jsp").forward(request, response);
-		}
-		
-		if(action.equals("validmodif")){
-			
 		}
 		
 		if(action.equals("search")){

@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-import com.books.hibernate.HibernateUtil;
 import com.books.model.User;
+import com.books.utilities.HibernateUtil;
 
 /**
  * Servlet implementation class LoginController
@@ -33,38 +33,57 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getParameter("action")!=null){
+		String action = request.getParameter("action");
+		
+		if(action.equals("logout")){
 			System.out.println("déconnexion ...");
 			request.getSession().setAttribute("user", null);
 			
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		else{
-			String log = request.getParameter("login");
-			String pass = request.getParameter("pwd");
-			User u = new User();
-			
-			Session sess = HibernateUtil.getSessionFactory().openSession();
-			
-			try{
-				u = (User) sess.get("com.books.model.User", log);
-			} 
-			catch (HibernateException he) {
-				System.out.println("login non trouvé : "+ he);
-			}
-			
-			sess.close();
-			
-			if(u!=null){
-				if(u.getPwd().compareTo(pass)==0){
-					if(u.getIsAdmin()){
-						request.getSession().setAttribute("user", u);
+			if(action.equals("login")){
+				
+				if(request.getSession().getAttribute("user")!=null){
+					User usr = (User) request.getSession().getAttribute("user");
+					if(usr.getIsAdmin()){
 						request.getRequestDispatcher("admin/admin_index.jsp").forward(request, response);
 					}
 					else{
-						request.getSession().setAttribute("user", u);
 						request.setAttribute("action", "load");
 						request.getRequestDispatcher("user/reader_index.jsp").forward(request, response);
+					}
+				}
+				String log = request.getParameter("login");
+				String pass = request.getParameter("pwd");
+				User u = new User();
+				
+				Session sess = HibernateUtil.getSessionFactory().openSession();
+				
+				try{
+					u = (User) sess.get("com.books.model.User", log);
+				} 
+				catch (HibernateException he) {
+					System.out.println("login non trouvé : "+ he);
+				}
+				
+				sess.close();
+				
+				if(u!=null){
+					if(u.getPwd().compareTo(pass)==0){
+						if(u.getIsAdmin()){
+							request.getSession().setAttribute("user", u);
+							request.getRequestDispatcher("admin/admin_index.jsp").forward(request, response);
+						}
+						else{
+							request.getSession().setAttribute("user", u);
+							request.setAttribute("action", "load");
+							request.getRequestDispatcher("user/reader_index.jsp").forward(request, response);
+						}
+					}
+					else{
+						request.setAttribute("result", "fail");
+						request.getRequestDispatcher("index.jsp").forward(request, response);
 					}
 				}
 				else{

@@ -1,4 +1,4 @@
-package com.books.hibernate;
+package com.books.utilities;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
