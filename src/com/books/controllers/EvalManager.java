@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import com.books.hibernate.HibernateUtil;
 import com.books.model.Books;
 import com.books.model.User;
+import com.books.utilities.HibernateUtil;
 
 /**
  * Servlet implementation class EvalManager

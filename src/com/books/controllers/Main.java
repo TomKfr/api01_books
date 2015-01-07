@@ -4,8 +4,8 @@ package com.books.controllers;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.books.hibernate.HibernateUtil;
 import com.books.model.User;
+import com.books.utilities.HibernateUtil;
 
 
 public class Main {

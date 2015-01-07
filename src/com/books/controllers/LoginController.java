@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-import com.books.hibernate.HibernateUtil;
 import com.books.model.User;
+import com.books.utilities.HibernateUtil;
 
 /**
  * Servlet implementation class LoginController

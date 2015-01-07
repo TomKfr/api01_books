@@ -15,8 +15,8 @@ import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
 
 import com.books.hibernate.BooksHome;
-import com.books.hibernate.HibernateUtil;
 import com.books.model.Books;
+import com.books.utilities.HibernateUtil;
 
 /**
  * Servlet implementation class BookMgmt
