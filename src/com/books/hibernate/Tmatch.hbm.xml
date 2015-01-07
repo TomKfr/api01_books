@@ -1,21 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 17 d?c. 2014 18:20:35 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 7 janv. 2015 16:18:42 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.books.model.Tmatch" table="tmatch" catalog="api01">
         <id name="num" type="java.lang.Integer">
             <column name="num" />
             <generator class="identity" />
         </id>
-        <property name="eval1" type="java.lang.Integer">
-            <column name="eval1" />
+        <property name="user1" type="string">
+            <column name="user1" length="100" />
         </property>
-        <property name="eval2" type="java.lang.Integer">
-            <column name="eval2" />
+        <property name="user2" type="string">
+            <column name="user2" length="100" />
         </property>
-        <property name="catMatch" type="string">
-            <column name="cat_match" length="50" />
+        <property name="book" type="string">
+            <column name="book" length="13" />
+        </property>
+        <property name="closest" type="java.lang.Boolean">
+            <column name="closest" />
         </property>
     </class>
 </hibernate-mapping>

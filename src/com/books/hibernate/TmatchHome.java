@@ -1,6 +1,6 @@
 package com.books.hibernate;
 
-// Generated 17 déc. 2014 18:20:35 by Hibernate Tools 3.4.0.CR1
+// Generated 7 janv. 2015 16:18:42 by Hibernate Tools 3.4.0.CR1
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 17 d?c. 2014 18:20:35 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 7 janv. 2015 16:18:42 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.books.model.Evaluation" table="evaluation" catalog="api01">
         <id name="num" type="java.lang.Integer">
@@ -17,8 +17,8 @@
         <property name="quality" type="java.lang.Integer">
             <column name="quality" />
         </property>
-        <property name="interest" type="java.lang.Integer">
-            <column name="interest" />
+        <property name="subject" type="java.lang.Integer">
+            <column name="subject" />
         </property>
         <property name="desire" type="java.lang.Integer">
             <column name="desire" />
@@ -31,6 +31,9 @@
         </property>
         <property name="score" type="java.lang.Double">
             <column name="score" precision="22" scale="0" />
+        </property>
+        <property name="isvalidated" type="java.lang.Boolean">
+            <column name="isvalidated" />
         </property>
     </class>
 </hibernate-mapping>
