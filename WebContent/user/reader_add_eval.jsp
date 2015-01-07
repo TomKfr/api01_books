@@ -14,6 +14,7 @@
   <%
   	User u = (User) request.getSession().getAttribute("user");
   	Books bk = (Books) request.getAttribute("book");
+  	System.out.println("isbn "+bk.getIsbn());
   %>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
@@ -37,26 +38,61 @@
 	
 	<div class="col-lg-6">
 			<div class="col-lg-12">
-				<form method="get" action="${pageContext.request.contextPath}/EvalManager" class="col-lg-offset-3 col-lg-6">
+				<form method="get" action="EvalManager" class="col-lg-offset-3 col-lg-6">
 					<div class="form-group">
-						<label for="isbn">Qualité d'écriture</label>
-						<input type="text" class="form-control" id="isbn" placeholder="ISBN" name="isbn">
+						<label for="isbn">Qualité d'écriture :</label>
+						<INPUT type= "radio" name="quality" value="0"> 0
+						<INPUT type= "radio" name="quality" value="1"> 1
+						<INPUT type= "radio" name="quality" value="2"> 2
+						<INPUT type= "radio" name="quality" value="3"> 3
+						<INPUT type= "radio" name="quality" value="4"> 4
 					</div>
 					<div class="form-group">
-						<label for="titre">Intérêt pour le livre</label>
-						<input type="text" class="form-control" id="titre" placeholder="Titre" name="titre">
+						<label for="titre">Intérêt pour le sujet du livre :</label>
+						<INPUT type= "radio" name="subject" value=0> 0
+						<INPUT type= "radio" name="subject" value=1> 1
+						<INPUT type= "radio" name="subject" value=2> 2
+						<INPUT type= "radio" name="subject" value=3> 3
+						<INPUT type= "radio" name="subject" value=4> 4
 					</div>
 					<div class="form-group">
-						<label for="titre">Intérêt pour le sujet</label>
-						<input type="text" class="form-control" id="titre" placeholder="Titre" name="titre">
+						<label for="titre">Désir de lire jusqu'à la fin :</label>
+						<INPUT type= "radio" name="desire" value="0"> 0
+						<INPUT type= "radio" name="desire" value="1"> 1
+						<INPUT type= "radio" name="desire" value="2"> 2
+						<INPUT type= "radio" name="desire" value="3"> 3
+						<INPUT type= "radio" name="desire" value="4"> 4
 					</div>
-					<input type="hidden" name="action" value="search"/>
+					<div class="form-group">
+						<label for="titre">Désir de lire un livre du même auteur :</label>
+						<INPUT type= "radio" name="read_author" value="0"> 0
+						<INPUT type= "radio" name="read_author" value="1"> 1
+						<INPUT type= "radio" name="read_author" value="2"> 2
+						<INPUT type= "radio" name="read_author" value="3"> 3
+						<INPUT type= "radio" name="read_author" value="4"> 4
+					</div>
+					<div class="form-group">
+						<label for="titre">Désir de recommander le livre à un ami :</label>
+						<INPUT type= "radio" name="recommend" value="0"> 0
+						<INPUT type= "radio" name="recommend" value="1"> 1
+						<INPUT type= "radio" name="recommend" value="2"> 2
+						<INPUT type= "radio" name="recommend" value="3"> 3
+						<INPUT type= "radio" name="recommend" value="4"> 4
+					</div>
+					<input type="hidden" name="action" value="newEval"/>
+					<input type="hidden" name="book" value="<%=bk.getIsbn()%>"/>
 					<div class="col-lg-3">
-						<input type="submit" class="btn btn-primary" value="Chercher">
 					</div>	
+					<div class="btn-group">
+  						<button type="submit" class="btn btn-success" value="Soumettre" name="bouton"> Soumettre </button>			
+					</div>
+					<div class="btn-group">
+  						<button type="submit" class="btn btn-primary" value="Enregistrer" name="bouton"> Enregistrer </button>			
+					</div>
 				</form>
 			</div>
 		</div>
+		
 	
 	<script src="bootstrap/js/jquery-2.1.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
