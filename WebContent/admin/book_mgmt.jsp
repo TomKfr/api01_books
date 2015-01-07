@@ -21,13 +21,13 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="LoginController?action=logout">Mon beau site</a>
+				<a class="navbar-brand" href="LoginController?action=login">Mon beau site</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="UserManager?action=index">User Management</a></li>
-				<li class="active"><a href="#">Book Management</a></li>
-				<li><a href="evaluation_management.html">Evaluation Management</a></li>
-				<li><a href="match_management.html">Match Management</a></li>
+				<li class="active"><a href="BookMgmt?action=index">Book Management</a></li>
+				<li><a href="EvalManager?action=index">Evaluation Management</a></li>
+				<li><a href="MatchManager?action=index">Match Management</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="logout.jsp">Déconnexion</a></li>

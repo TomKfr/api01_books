@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.books.model.Evaluation"%>
+<%@page import="java.util.List"%>
 <%@page import="com.books.model.User"%>
 <html lang="fr">
   <head>
@@ -12,6 +15,12 @@
   <body>
   <%
   	User u = (User) request.getSession().getAttribute("user");
+  	List<Evaluation> list = (List<Evaluation>) request.getAttribute("evals");
+  	Iterator<Evaluation> it = null;
+  	if(list!=null){
+  		it = list.iterator();
+  	}
+
   %>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
@@ -21,7 +30,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="UserManager?action=index">User Management</a></li>
 				<li><a href="BookMgmt?action=index">Book Management</a></li>
-				<li><a href="EvalManager?action=index">Evaluation Management</a></li>
+				<li class="active"><a href="EvalManager?action=index">Evaluation Management</a></li>
 				<li><a href="MatchManager?action=index">Match Management</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -31,14 +40,24 @@
 	</div>
 	<div class="container">
 	<header class="page-header">
-		<h1>Bonjour, <%=u.getName()%> </h1>
+		<h1>Gestion des évaluations </h1>
 	</header>
-	</div>
-	<div class="col-lg-offset-3 col-lg-8">
-	<p>email : <%=u.getEmail()%></p>
-	<p>Adresse : <%=u.getAddress()%></p>
-	<p>Password : <%=u.getPwd()%></p>
-	<p>Role : <%=u.getIsAdmin()?"Admin":"User"%></p>
+	<div class="container">
+		<div class="col-lg-12">
+			<table class="table">
+				<tr><th>Utilisateur</th><th>Livre</th><th>Qualité</th><th>Intérêt sujet</th><th>Désir continuer</th><th>Lire auteur</th><th>Recommender</th><th>Score</th><th>Validée</th></tr>
+				<%
+					if(list!=null){
+						while(it.hasNext()){
+							out.println("<tr><td>"+it.next().getUser()+"</td><td>"+it.next().getBook()+"</td><td>"+it.next().getQuality()+"</td><td>"+it.next().getSubject()+"</td><td>"+it.next().getDesire()+"</td><td>"+it.next().getReadAuthor()+"</td><td>"+it.next().getRecommend()+"</td><td>"+it.next().getScore()+"</td><td>"+it.next().getIsvalidated()+"</td><td></tr>");
+						}
+					}
+					else{
+						out.println("<tr><td>Pas d'évaluation enregistrée</td></tr>");
+					}
+				%>
+			</table>
+		</div>
 	</div>
 	
 	<script src="bootstrap/js/jquery-2.1.1.min.js"></script>
