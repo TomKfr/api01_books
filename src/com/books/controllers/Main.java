@@ -6,39 +6,15 @@ import org.hibernate.Transaction;
 
 import com.books.model.User;
 import com.books.utilities.HibernateUtil;
+import com.books.utilities.MailUtil;
 
 
 public class Main {
 
 	public static void main(String[] args) {
-System.out.println("Debut");
+		System.out.println("Debut");
 		
-		Session sess = HibernateUtil.getSessionFactory().openSession();
-		Transaction t = sess.beginTransaction();
-		
-		User usr = new User("hellomyfriend");
-		usr.setAccountStatus(true);
-		usr.setName("Patrick");
-		sess.save(usr);
-		
-		t.commit();
-		
-		//Pers result = (Pers) sess.get("Pers", "hello");
-		
-		sess.beginTransaction();
-		User peep = (User) sess.get("com.books.model.User", "hellomyfriend");
-		peep.setAddress("la bas");
-		peep.setIsAdmin(false);
-		peep.setTel("65453612");
-		
-		//sess.update(peep);
-		sess.getTransaction().commit();
-		//Pers result = psh.findById("hello");
-		
-		System.out.println(peep.getName());
-		
-		sess.flush();
-		sess.close();
+		MailUtil.sendMessage("Coucou !", "Ceci est un essai d'envoi de mail", "morgane.becret@gmail.com ", "tkieffer67@gmail.com");
 		
 		System.out.println("Fin");
 	}
