@@ -55,7 +55,7 @@ public class EvalManager extends HttpServlet {
 			sess.close();
 			request.getRequestDispatcher("EvalManager?action=index").forward(request, response);
 		}
-		if(action.equals("index")){
+		if(action.equals("index")){ 
 			
 			List<Evaluation> list = new ArrayList<Evaluation>();
 			list = sess.createCriteria(Evaluation.class).list();

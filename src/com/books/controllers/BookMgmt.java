@@ -38,6 +38,7 @@ public class BookMgmt extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action = request.getParameter("action");
+		System.out.println("action : "+action);
 		
 		if(action.equals("index")){
 			System.out.println("forwarding ...");
@@ -60,7 +61,7 @@ public class BookMgmt extends HttpServlet {
 			
 			request.setAttribute("exec", "success");
 		}
-		if(action.equals("serach")){
+		if(action.equals("search")){
 			System.out.println("searching ...");
 			Session sess = HibernateUtil.getSessionFactory().openSession();
 			sess.beginTransaction();
@@ -84,6 +85,26 @@ public class BookMgmt extends HttpServlet {
 			sess.getTransaction().commit();
 			sess.close();
 			System.out.println("search finished");
+		}
+		if(action.equals("delete")){
+			
+			String book = request.getParameter("book");
+			System.out.println("book = "+book);
+			
+			Session sess = HibernateUtil.getSessionFactory().openSession();
+			sess.beginTransaction();
+			sess
+				.createQuery("delete from com.books.model.Books where isbn = :isbn")
+				.setString("isbn", book)
+				.executeUpdate();
+			sess.getTransaction().commit();
+			sess.close();
+			
+			request.getRequestDispatcher("BookMgmt?action=search&isbn=").forward(request, response);
+			
+		}
+		if(action.equals("modify")){
+			
 		}
 		else{
 		}

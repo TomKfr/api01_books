@@ -77,7 +77,7 @@
 						<label for="titre">Titre</label>
 						<input type="text" class="form-control" id="titre" placeholder="Titre" name="titre">
 					</div>
-					<input type="hidden" name="action" value="serach"/>
+					<input type="hidden" name="action" value="search"/>
 					<div class="col-lg-3">
 						<input type="submit" class="btn btn-primary" value="Chercher">
 					</div>	
@@ -97,11 +97,12 @@
 					List<Books> list = (List<Books>) request.getAttribute("search");
 					if(list!=null){
 						out.println("<div class='col-lg-12'><br></div><h4>Résultats</h4>");
-						out.println("<table class='table'><tr><th>ISBN</th><th>Titre</th><th>Auteur</th><th>Genre</th></tr>");
+						out.println("<table class='table'><tr><th>ISBN</th><th>Titre</th><th>Auteur</th><th>Genre</th><th>Action</th></tr>");
 						Iterator<Books> it = list.iterator();
 						while(it.hasNext()){
 							Books bk = (Books) it.next();
-							out.println("<tr><td>"+bk.getIsbn()+"</td><td>"+bk.getTitre()+"</td><td>"+bk.getAuteur()+"</td><td>"+bk.getGenre()+"</td></tr>");
+							out.println("<tr><td>"+bk.getIsbn()+"</td><td>"+bk.getTitre()+"</td><td>"+bk.getAuteur()+"</td><td>"+bk.getGenre()+"</td>");
+							out.println("<td align='center'><a class='btn btn-info' href='BookMgmt?action=modify&book="+bk.getIsbn()+"'>Modifier</a><a class='btn btn-danger' href='BookMgmt?action=delete&book="+bk.getIsbn()+"'>Supprimer</a></td></tr>");
 						}
 						out.println("</table>");
 					}
