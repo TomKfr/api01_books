@@ -44,59 +44,21 @@ public class EvalManager extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		if(action.equals("delete")){
-			System.out.println("email :"+u.getEmail());
-			System.out.println("isbn :"+request.getParameter("isbn"));
 			
+			String num = request.getParameter("num");
 			sess.beginTransaction();
-			sess.createQuery("delete from com.books.model.Evaluation eval where eval.user= :user and eval.book= :book")
-				.setString("user", u.getEmail())
-				.setString("book", request.getParameter("isbn"))
+			sess.createQuery("delete from com.books.model.Evaluation where num = :num")
+				.setString("num", num)
 				.executeUpdate();
 			sess.getTransaction().commit();
 			
 			sess.close();
-			request.getRequestDispatcher("BooksController?action=list&page=0").forward(request, response);
+			request.getRequestDispatcher("EvalManager?action=index").forward(request, response);
 		}
-		if(action.equals("search")){
-			List<Books> list = new ArrayList<Books>();
-			
-			String isbn = request.getParameter("isbn");
-			System.out.println("isbn : "+request.getParameter("isbn"));
-			if(!isbn.isEmpty()){
-				Books bk = (Books) sess.get("com.books.model.Books", isbn);
-				list.add(bk);
-			}
-			else{
-				list = sess
-						.createCriteria(Books.class)
-						.add(Restrictions.like("titre", "%"+request.getParameter("titre")+"%"))
-						.list();
-			}
-			request.setAttribute("books", list);
-			System.out.println("forwarding ...");
-			request.getRequestDispatcher("/user/reader_add_book.jsp").forward(request, response);
-		}
-		if(action.equals("add")){
-			
-			String isbn = request.getParameter("isbn");
-			sess.beginTransaction();
-			
-			Books bk = (Books) sess.get("com.books.model.Books", isbn);
-			System.out.println("Evaluation du livre : "+bk.getTitre());
-			
-			sess.getTransaction().commit();
-			
-			request.setAttribute("book", bk);
-			
-			System.out.println("forwarding ...");
-			request.getRequestDispatcher("/user/reader_add_eval.jsp").forward(request, response);
-		}
-		
 		if(action.equals("index")){
 			
 			List<Evaluation> list = new ArrayList<Evaluation>();
-			sess.createCriteria(Evaluation.class).list();
-			
+			list = sess.createCriteria(Evaluation.class).list();
 			request.setAttribute("evals", list);
 			request.getRequestDispatcher("./admin/admin_eval_mgmt.jsp").forward(request, response);
 		}

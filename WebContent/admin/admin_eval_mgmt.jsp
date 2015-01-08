@@ -45,11 +45,14 @@
 	<div class="container">
 		<div class="col-lg-12">
 			<table class="table">
-				<tr><th>Utilisateur</th><th>Livre</th><th>Qualité</th><th>Intérêt sujet</th><th>Désir continuer</th><th>Lire auteur</th><th>Recommender</th><th>Score</th><th>Validée</th></tr>
+				<tr><th>Utilisateur</th><th>Livre</th><th>Qualité</th><th>Intérêt sujet</th><th>Désir continuer</th><th>Lire auteur</th><th>Recommender</th><th>Score</th><th>Validée</th><th>Action</th></tr>
 				<%
 					if(list!=null){
 						while(it.hasNext()){
-							out.println("<tr><td>"+it.next().getUser()+"</td><td>"+it.next().getBook()+"</td><td>"+it.next().getQuality()+"</td><td>"+it.next().getSubject()+"</td><td>"+it.next().getDesire()+"</td><td>"+it.next().getReadAuthor()+"</td><td>"+it.next().getRecommend()+"</td><td>"+it.next().getScore()+"</td><td>"+it.next().getIsvalidated()+"</td><td></tr>");
+							Evaluation evl = it.next();
+							out.println("<tr><td>"+evl.getUser()+"</td><td>"+evl.getBook()+"</td><td>"+evl.getQuality()+"</td><td>"+evl.getSubject()+"</td><td>"+evl.getDesire()+"</td><td>"+evl.getReadAuthor()+"</td><td>"+evl.getRecommend()+"</td><td>"+evl.getScore()+"</td><td>"+evl.getIsvalidated()+"</td>");
+							out.println("<td><a href='MatchManager?action=update&user="+evl.getUser()+"&book="+evl.getBook()+"' class='btn btn-primary'>Update Matches</a>  <a href='EvalManager?action=delete&num="+evl.getNum()+"' class='btn btn-danger'>Supprimer</a></td></tr>");
+							System.out.println("numeval :"+evl.getNum());
 						}
 					}
 					else{
