@@ -91,7 +91,7 @@ public class BooksController extends HttpServlet {
 			sess.close();
 			System.out.println("added !");
 			
-			request.getRequestDispatcher("user/reader_add_eval.jsp").forward(request, response);
+			request.getRequestDispatcher("EvalManager?action=search").forward(request, response);
 		}
 	}
 
