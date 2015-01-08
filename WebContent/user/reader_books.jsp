@@ -71,7 +71,7 @@
   			</ul>
   		</nav>
 	</div>
-	
+	<input type="hidden" name="action" value="searchbooks"/>
 	<script src="../bootstrap/js/jquery-2.1.1.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
   </body>

@@ -52,6 +52,14 @@
 						<label for="titre">Titre</label>
 						<input type="text" class="form-control" id="titre" placeholder="Titre" name="titre">
 					</div>
+					<div class="form-group">
+						<label for="genre">Genre</label>
+						<input type="text" class="form-control" id="genre" placeholder="Genre" name="genre">
+					</div>
+					<div class="form-group">
+						<label for="auteur">Auteur</label>
+						<input type="text" class="form-control" id="auteur" placeholder="Auteur" name="auteur">
+					</div>
 					<input type="hidden" name="action" value="add"/>
 					<div class="col-lg-3">
 						<input type="submit" class="btn btn-primary" value="Enregistrer">
