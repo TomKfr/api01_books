@@ -42,6 +42,7 @@ public class BookMgmt extends HttpServlet {
 		
 		if(action.equals("index")){
 			System.out.println("forwarding ...");
+			request.getRequestDispatcher("./admin/book_mgmt.jsp").forward(request, response);
 		}
 		if(action.equals("add")){
 			System.out.println("adding ...");
@@ -60,6 +61,7 @@ public class BookMgmt extends HttpServlet {
 			System.out.println("added !");
 			
 			request.setAttribute("exec", "success");
+			request.getRequestDispatcher("./admin/book_mgmt.jsp").forward(request, response);
 		}
 		if(action.equals("search")){
 			System.out.println("searching ...");
@@ -85,6 +87,7 @@ public class BookMgmt extends HttpServlet {
 			sess.getTransaction().commit();
 			sess.close();
 			System.out.println("search finished");
+			request.getRequestDispatcher("./admin/book_mgmt.jsp").forward(request, response);
 		}
 		if(action.equals("delete")){
 			
@@ -108,7 +111,7 @@ public class BookMgmt extends HttpServlet {
 		}
 		else{
 		}
-		request.getRequestDispatcher("./admin/book_mgmt.jsp").forward(request, response);
+		
 	}
 
 	/**
