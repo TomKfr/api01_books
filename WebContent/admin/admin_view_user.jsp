@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.books.model.Evaluation"%>
+<%@page import="java.util.List"%>
 <%@page import="com.books.model.User"%>
 <html lang="fr">
   <head>
@@ -13,6 +16,7 @@
   <%
   	User u = (User) request.getSession().getAttribute("user");
   	User vieweduser = (User) request.getAttribute("vieweduser");
+  	List<Evaluation> list = (List<Evaluation>) request.getAttribute("evalsuser");
   %>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
@@ -43,7 +47,25 @@
 			</div>
 			<div class="col-lg-12">
 				<h2>Livres évalués</h2>
+				<table class="table">
+				<%
+					if(list!=null){
+						Iterator<Evaluation> it = list.iterator();
+						out.println("<tr><th>Utilisateur</th><th>Livre</th><th>Qualité</th><th>Intérêt sujet</th><th>Désir continuer</th><th>Lire auteur</th><th>Recommender</th><th>Score</th></tr>");
+						while(it.hasNext()){
+							Evaluation e = it.next();
+							%>
+							<tr><td><%=e.getUser() %></td><td><%=e.getBook() %></td><td><%=e.getQuality() %></td><td><%=e.getSubject() %></td><td><%=e.getDesire() %></td><td><%=e.getReadAuthor() %></td><td><%=e.getRecommend() %></td><td><%=e.getScore() %></td></tr>
+							<%
+						}
+					}
+					else{
+						out.println("<tr><td>Pas d'evals</td></tr>");
+					}
+				%>
+				</table>
 			</div>
+			
 			<div class="col-lg-12">
 				<h2>Match</h2>
 			</div>

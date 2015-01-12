@@ -15,6 +15,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import com.books.model.Evaluation;
 import com.books.model.User;
 import com.books.utilities.HibernateUtil;
 import com.books.utilities.MailUtil;
@@ -75,7 +76,7 @@ public class UserManager extends HttpServlet {
 				Session sess = HibernateUtil.getSessionFactory().openSession();
 				
 				sess.beginTransaction();
-				Query qry = sess.createQuery("delete User where email = :email");
+				Query qry = sess.createQuery("delete User where email = :email casacde");
 				qry.setString("email", email);
 				
 				int result = qry.executeUpdate();
@@ -148,11 +149,13 @@ public class UserManager extends HttpServlet {
 			String email = request.getParameter("email");
 			
 			User usr = (User) sess.get(User.class, email);
+			List<Evaluation> listeval = sess.createCriteria(Evaluation.class).add(Restrictions.eq("user", email)).list();
 			//Ajouter la récupération des evals et des matchs pour cet user
 			
 			sess.close();
 			
 			request.setAttribute("vieweduser", usr);
+			request.setAttribute("evalsuser", listeval);
 			
 			request.getRequestDispatcher("./admin/admin_view_user.jsp").forward(request, response);			
 		}

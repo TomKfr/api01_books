@@ -58,7 +58,7 @@
 				<form method="get" action="UserManager" class="col-lg-offset-3 col-lg-6">
 					<div class="form-group">
 						<label for="mail">email</label>
-						<input type="text" class="form-control" id="mail" value="<%=usr.getEmail() %>" name="email">
+						<input type="text" class="form-control" id="mail" value="<%=usr.getEmail().isEmpty()?'"':usr.getEmail()+'"'+" disabled" %> name="email">
 					</div>
 					<div class="form-group">
 						<label for="nom">nom</label>
@@ -85,6 +85,7 @@
 						<input type="checkbox" class="form-control" id="admin"  name="isadmin" value="true" <%if(usr.getIsAdmin()) out.println("checked"); %>>
 					</div>
 					<input type="hidden" name="action" value="add"/>
+					<%=usr.getEmail().isEmpty()?"":"<input type='hidden' name='email' value='"+usr.getEmail()+"'/>" %>
 					<div class="col-lg-3">
 						<input type="submit" class="btn btn-primary" value="Enregistrer">
 					</div>	
