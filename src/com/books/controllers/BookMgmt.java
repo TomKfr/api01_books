@@ -16,6 +16,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.books.hibernate.BooksHome;
 import com.books.model.Books;
+import com.books.model.User;
 import com.books.utilities.HibernateUtil;
 
 /**
@@ -107,10 +108,17 @@ public class BookMgmt extends HttpServlet {
 			
 		}
 		if(action.equals("modify")){
+			Session sess = HibernateUtil.getSessionFactory().openSession();
+			sess.beginTransaction();
+			String isbn = request.getParameter("book");
 			
+			Books bk = (Books) sess.get(Books.class, isbn);
+			
+			request.setAttribute("modifbook", bk);
+			
+			request.getRequestDispatcher("./admin/book_mgmt.jsp").forward(request, response);
 		}
-		else{
-		}
+		
 		
 	}
 

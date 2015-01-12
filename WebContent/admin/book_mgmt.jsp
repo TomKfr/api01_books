@@ -17,6 +17,15 @@
   <body>
   <%
   	User u = (User) request.getSession().getAttribute("user");
+  
+	Books b = (Books) request.getAttribute("modifbook");
+	if(b==null){
+		b=new Books();
+		b.setIsbn("");
+		b.setTitre("");
+		b.setGenre("");
+		b.setAuteur("");
+	}
   %>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
