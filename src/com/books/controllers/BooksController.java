@@ -1,6 +1,7 @@
 package com.books.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,8 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.CriteriaQuery;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.engine.spi.TypedValue;
 
 import com.books.model.Books;
 import com.books.model.User;
@@ -34,7 +40,10 @@ public class BooksController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("action").equals("searchBooks")) {
+		
+		String action = request.getParameter("action");
+		
+		if(action.equals("searchBooks")) {
 			Integer nbpages = (Integer) request.getAttribute("nbpages"); 
 			Integer  pagination = Integer.parseInt(request.getParameter("page"));
 			User u = (User) request.getSession().getAttribute("user");
@@ -75,7 +84,8 @@ public class BooksController extends HttpServlet {
 			
 			sess.close();
 		}
-		if(request.getParameter("action").equals("add")) {
+		
+		if(action.equals("add")) {
 			System.out.println("adding ...");
 			Session sess = HibernateUtil.getSessionFactory().openSession();
 			sess.beginTransaction();
@@ -92,6 +102,36 @@ public class BooksController extends HttpServlet {
 			System.out.println("added !");
 			
 			request.getRequestDispatcher("BooksController?action=search").forward(request, response);
+		}
+		
+		if(action.equals("search")){
+			
+			Session sess = HibernateUtil.getSessionFactory().openSession();
+			List<Books> list = new ArrayList<Books>();
+			
+			if(!request.getParameter("isbn").isEmpty()){
+				
+				list = sess.createCriteria(Books.class)
+									.add(Restrictions.eq("isbn", request.getParameter("isbn")))
+									.list();
+				System.out.println("recherche par isbn : "+request.getParameter("isbn"));
+			}
+			else{
+				
+				list = sess.createCriteria(Books.class)
+							.add(Restrictions.like("titre", "%"+request.getParameter("titre")+"%"))
+							.list();
+				System.out.println("recherche par titre : "+request.getParameter("titre"));
+			}
+			
+			request.setAttribute("books", list);
+			request.getRequestDispatcher("./user/reader_add_book.jsp").forward(request, response);
+		}
+		
+		if(action.equals("index")){
+			List<Books> list = new ArrayList<Books>();
+			request.setAttribute("books", list);
+			request.getRequestDispatcher("./user/reader_add_book.jsp").forward(request, response);
 		}
 	}
 

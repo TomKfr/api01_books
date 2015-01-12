@@ -19,12 +19,12 @@
   	User u = (User) request.getSession().getAttribute("user");
   	List<Books> books = (List<Books>) request.getAttribute("books");
   	Iterator<Books> it=null;
-  	if(books != null) it = books.iterator();
+  	if(!books.isEmpty()) it = books.iterator();
   %>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="LoginController?action=logout">Mon beau site</a>
+				<a class="navbar-brand" href="LoginController?action=login">Mon beau site</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li  class="active"><a href="#">Find a book</a></li>
@@ -69,7 +69,7 @@
 			</div>
 			<div class="col-lg-12">
 				<h2>Rechercher des livres</h2>
-				<form method="get" action="${pageContext.request.contextPath}/EvalManager" class="col-lg-offset-3 col-lg-6">
+				<form method="get" action="${pageContext.request.contextPath}/BooksController" class="col-lg-offset-3 col-lg-6">
 					<div class="form-group">
 						<label for="isbn">ISBN</label>
 						<input type="text" class="form-control" id="isbn" placeholder="ISBN" name="isbn">
@@ -88,13 +88,13 @@
 		<div class="col-lg-6">
 			<div class="col-lg-12">
 				<%
-					if(books!=null){
+					if(!books.isEmpty()){
 						out.println("<div class='col-lg-12'><br></div><h4>Résultats</h4>");
 						out.println("<table class='table'><tr><th>ISBN</th><th>Titre</th><th>Auteur</th><th>Genre</th><th>Action</th></tr>");
 						while(it.hasNext()){
 							Books bk = (Books) it.next();
 							out.println("<tr><td>"+bk.getIsbn()+"</td><td>"+bk.getTitre()+"</td><td>"+bk.getAuteur()+"</td><td>"+bk.getGenre()+"</td>");
-							out.println("<td><a class='btn btn-info' href='EvalManager?action=add&isbn="+bk.getIsbn()+"'>Evaluer</a></td></tr>");
+							out.println("<td><a class='btn btn-info' href='EvalManager?action=initeval&isbn="+bk.getIsbn()+"'>Evaluer</a></td></tr>");
 						}
 						out.println("</table>");
 					}

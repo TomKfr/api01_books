@@ -19,7 +19,7 @@
 				<a class="navbar-brand" href="logout.jsp">Mon beau site</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="./user/reader_add_book.jsp">Find a book</a></li>
+				<li><a href="BooksController?action=index">Find a book</a></li>
 				<li><a href="BooksController?action=list&page=0">My books</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
