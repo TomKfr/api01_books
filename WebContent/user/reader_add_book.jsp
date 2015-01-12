@@ -28,7 +28,7 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li  class="active"><a href="#">Find a book</a></li>
-				<li><a href="${pageContext.request.contextPath}/BooksController?action=list&page=0">My books</a></li>
+				<li><a href="${pageContext.request.contextPath}/BooksController?action=searchBooks&page=0">My books</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="LoginController?action=logout">Déconnexion</a></li>

@@ -19,14 +19,7 @@
   	User u = (User) request.getSession().getAttribute("user");
   
 	Books b = (Books) request.getAttribute("modifbook");
-	if(b==null){
-		b=new Books();
-		b.setIsbn("");
-		b.setTitre("");
-		b.setGenre("");
-		b.setAuteur("");
-	}
-  %>
+	%>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -48,28 +41,28 @@
 		<h1>Gestion des livres </h1>
 	</header>
 	</div>
-	<div class="container">
 		<div class="col-lg-6">
 			<div class="col-lg-12">
 				<h2>Ajouter un livre</h2>
 				<form method="get" action="BookMgmt" class="col-lg-offset-4 col-lg-6">
 					<div class="form-group">
 						<label for="isbn">ISBN</label>
-						<input type="text" class="form-control" id="isbn" placeholder="ISBN" name="isbn">
+						<input type="text" class="form-control" id="isbn" placeholder="ISBN" name="isbn" <%=b!=null?"value='"+b.getIsbn()+"' disabled":"" %>>
 					</div>
 					<div class="form-group">
 						<label for="titre">Titre</label>
-						<input type="text" class="form-control" id="titre" placeholder="Titre" name="titre">
+						<input type="text" class="form-control" id="titre" placeholder="Titre" name="titre" <%=b!=null?"value='"+b.getTitre()+"'":"" %>>
 					</div>
 					<div class="form-group">
 						<label for="genre">Genre</label>
-						<input type="text" class="form-control" id="genre" placeholder="Genre" name="genre">
+						<input type="text" class="form-control" id="genre" placeholder="Genre" name="genre" <%=b!=null?"value='"+b.getGenre()+"'":"" %>>
 					</div>
 					<div class="form-group">
 						<label for="auteur">Auteur</label>
-						<input type="text" class="form-control" id="auteur" placeholder="Auteur" name="auteur">
+						<input type="text" class="form-control" id="auteur" placeholder="Auteur" name="auteur" <%=b!=null?"value='"+b.getAuteur()+"'":"" %>>
 					</div>
 					<input type="hidden" name="action" value="add"/>
+					<%=b!=null?"<input type='hidden' name='isbn' value='"+b.getIsbn()+"'/>":"" %>
 					<div class="col-lg-3">
 						<input type="submit" class="btn btn-primary" value="Enregistrer">
 					</div>	
@@ -97,28 +90,29 @@
 			<div class="col-lg-12">
 				<%
 					if(request.getAttribute("exec")=="success"){
-						out.println("<div class='col-lg-6'><br><br><br><br><br><br></div><div class='col-lg-8  alert alert-success' role='alert'>Ajout réussi !</div>");
+						out.println("<div class='col-lg-6'><br><br><br><br><br><br></div><div class='col-lg-8  alert alert-success' role='alert'>Ajout/modification OK !</div>");
 					}
 				%>
 			</div>
 			<div class="col-lg-12">
 				<%
 					List<Books> list = (List<Books>) request.getAttribute("search");
-					if(list!=null){
+					if(list!=null && !list.isEmpty()){
 						out.println("<div class='col-lg-12'><br></div><h4>Résultats</h4>");
 						out.println("<table class='table'><tr><th>ISBN</th><th>Titre</th><th>Auteur</th><th>Genre</th><th>Action</th></tr>");
 						Iterator<Books> it = list.iterator();
 						while(it.hasNext()){
 							Books bk = (Books) it.next();
 							out.println("<tr><td>"+bk.getIsbn()+"</td><td>"+bk.getTitre()+"</td><td>"+bk.getAuteur()+"</td><td>"+bk.getGenre()+"</td>");
-							out.println("<td align='center'><a class='btn btn-info' href='BookMgmt?action=modify&book="+bk.getIsbn()+"'>Modifier</a><a class='btn btn-danger' href='BookMgmt?action=delete&book="+bk.getIsbn()+"'>Supprimer</a></td></tr>");
+							out.println("<td align='center'><a class='btn btn-info' href='BookMgmt?action=modify&book="+bk.getIsbn()+"'>Modifier</a><a class='btn btn-danger' href='BookMgmt?action=delete&book="+bk.getIsbn()+"'>Supprimer</a>");
+							out.println("<a class='btn btn-success' href='EvalManager?action=index&isbn="+bk.getIsbn()+"'>Voir Evals</a></td></tr>");
 						}
 						out.println("</table>");
 					}
+					
 				%>
 			</div>
 		</div>
-	</div>
 		
 	<script src="bootstrap/js/jquery-2.1.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>

@@ -28,8 +28,8 @@
 				<a class="navbar-brand" href="./logout.jsp">Mon beau site</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="reader_add_book.jsp">Find a book</a></li>
-				<li class="active"><a href="#">My books</a></li>
+				<li><a href="${pageContext.request.contextPath}/BooksController?action=index">Find a book</a></li>
+				<li class="active"><a href="${pageContext.request.contextPath}/BooksController?action=searchBooks&page=0">My books</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="./logout.jsp">Déconnexion</a></li>

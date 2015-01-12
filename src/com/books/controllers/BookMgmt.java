@@ -56,7 +56,7 @@ public class BookMgmt extends HttpServlet {
 			bk.setGenre(request.getParameter("genre"));
 			bk.setAuteur(request.getParameter("auteur"));
 			
-			sess.save(bk);
+			sess.saveOrUpdate(bk);
 			sess.getTransaction().commit();
 			sess.close();
 			System.out.println("added !");

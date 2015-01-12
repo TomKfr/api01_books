@@ -58,7 +58,12 @@ public class EvalManager extends HttpServlet {
 		if(action.equals("index")){ 
 			
 			List<Evaluation> list = new ArrayList<Evaluation>();
-			list = sess.createCriteria(Evaluation.class).list();
+			if(request.getParameter("isbn")==null){
+				list = sess.createCriteria(Evaluation.class).list();
+			}
+			else{
+				list = sess.createCriteria(Evaluation.class).add(Restrictions.like("book", request.getParameter("isbn"))).list();
+			}
 			request.setAttribute("evals", list);
 			request.getRequestDispatcher("./admin/admin_eval_mgmt.jsp").forward(request, response);
 		}
