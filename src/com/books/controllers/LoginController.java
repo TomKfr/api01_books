@@ -42,8 +42,7 @@ public class LoginController extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		else{
-			if(action.equals("login")){
-				
+			if(action.equals("login")){			
 				if(request.getSession().getAttribute("user")!=null){
 					User usr = (User) request.getSession().getAttribute("user");
 					if(usr.getIsAdmin()){
@@ -70,6 +69,7 @@ public class LoginController extends HttpServlet {
 				sess.close();
 				
 				if(u!=null){
+					request.getSession().setAttribute("matchalgo", "by score");
 					if(u.getPwd().compareTo(pass)==0){
 						if(u.getIsAdmin()){
 							request.getSession().setAttribute("user", u);
