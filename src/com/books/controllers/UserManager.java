@@ -76,7 +76,7 @@ public class UserManager extends HttpServlet {
 				Session sess = HibernateUtil.getSessionFactory().openSession();
 				
 				sess.beginTransaction();
-				Query qry = sess.createQuery("delete User where email = :email casacde");
+				Query qry = sess.createQuery("delete User where email = :email");
 				qry.setString("email", email);
 				
 				int result = qry.executeUpdate();

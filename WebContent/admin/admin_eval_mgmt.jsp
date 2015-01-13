@@ -44,6 +44,16 @@
 	</header>
 	<div class="container">
 		<div class="col-lg-12">
+			<h3>Rechercher par utilisateur</h3>
+			<form method="get" action="EvalManager">
+				<div class="form-group">
+				Email : <input type="text" name="email" placeholder="email"/>
+				<input type="hidden" name="action" value="filter">
+				<input class="btn btn-primary" type="submit"/>
+				</div>
+			</form>
+		</div>
+		<div class="col-lg-12">
 			<table class="table">
 				<tr><th>Utilisateur</th><th>Livre</th><th>Qualité</th><th>Intérêt sujet</th><th>Désir continuer</th><th>Lire auteur</th><th>Recommender</th><th>Score</th><th>Validée</th><th>Action</th></tr>
 				<%
