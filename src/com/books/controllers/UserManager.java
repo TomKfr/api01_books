@@ -107,6 +107,10 @@ public class UserManager extends HttpServlet {
 		
 		if(action.equals("search")){
 			System.out.println("searching ...");
+			
+			String nbpagesstr = request.getParameter("nbpages");
+			String pagestr = request.getParameter("page");
+			
 			Session sess = HibernateUtil.getSessionFactory().openSession();
 			sess.beginTransaction();
 			
@@ -138,7 +142,19 @@ public class UserManager extends HttpServlet {
 					}
 				}
 			}
+
+			Integer nbpages;
+			if(nbpagesstr==null) nbpages = Math.round(list.size()/7);
+			else nbpages = Integer.parseInt(nbpagesstr);
+			Integer page;
+			if(pagestr==null) page = 1;
+			else page = Integer.parseInt(pagestr);
+			
+			list = list.subList((page-1)*7+1, Math.min(list.size(), (page*7)));
+			
 			request.setAttribute("search", list);
+			request.setAttribute("nbpages", nbpages);
+			request.setAttribute("page", page);
 			
 			sess.getTransaction().commit();
 			sess.close();

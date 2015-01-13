@@ -55,7 +55,7 @@
 		</div>
 		<div class="col-lg-12">
 			<table class="table">
-				<tr><th>Utilisateur</th><th>Livre</th><th>Qualité</th><th>Intérêt sujet</th><th>Désir continuer</th><th>Lire auteur</th><th>Recommender</th><th>Score</th><th>Validée</th><th>Action</th></tr>
+				<tr><th>Utilisateur</th><th>Livre</th><th>Qualité</th><th>Intérêt sujet</th><th>Désir continuer</th><th>Lire auteur</th><th>Recommander</th><th>Score</th><th>Validée</th><th>Action</th></tr>
 				<%
 					if(list!=null){
 						while(it.hasNext()){

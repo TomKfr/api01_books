@@ -112,7 +112,7 @@
 					
 				%>
 			</div>
-			<div class="col-lg-offset-2 col-lg-8">
+			<div class="col-lg-offset-1 col-lg-10 centered">
 			<nav>
   				<ul class="pagination">
   				<%
@@ -130,7 +130,7 @@
 	</div>
 		</div>
 		
-	<script src="bootstrap/js/jquery-2.1.1.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/bootstrap/js/jquery-2.1.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>

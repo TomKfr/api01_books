@@ -133,6 +133,21 @@
 					}
 				%>
 			</div>
+			<div class="col-lg-offset-4 col-lg-4 centered">
+			<nav>
+  				<ul class="pagination">
+  				<%
+  					if(list!=null){
+  					Integer pg = (Integer) request.getAttribute("page");
+  					System.out.println("nbpages :"+request.getAttribute("nbpages"));
+  					for(int i=1;i<((Integer) request.getAttribute("nbpages"))+2;i++){
+  						out.println("<li");
+  						if(i==pg) out.println("class='active'");
+  						out.println("><a href='?page="+i+"&isbn="+request.getParameter("isbn")+"&titre="+request.getParameter("titre")+"&action=search'>"+i+"</a></li>");
+  					}}
+  				%>
+  			</ul>
+  			</nav>
 		</div>
     </div>
     <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-2.1.1.min.js"></script>
