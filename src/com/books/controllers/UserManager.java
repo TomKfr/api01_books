@@ -16,6 +16,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.books.model.Evaluation;
+import com.books.model.Tmatch;
 import com.books.model.User;
 import com.books.utilities.HibernateUtil;
 import com.books.utilities.MailUtil;
@@ -170,12 +171,13 @@ public class UserManager extends HttpServlet {
 			
 			User usr = (User) sess.get(User.class, email);
 			List<Evaluation> listeval = sess.createCriteria(Evaluation.class).add(Restrictions.eq("user", email)).list();
-			//Ajouter la récupération des evals et des matchs pour cet user
+			List<Tmatch> listmatch = sess.createCriteria(Tmatch.class).add(Restrictions.or(Restrictions.eq("user1", email),Restrictions.eq("user2", email))).list();
 			
 			sess.close();
 			
 			request.setAttribute("vieweduser", usr);
 			request.setAttribute("evalsuser", listeval);
+			request.setAttribute("matchsuser", listmatch);
 			
 			request.getRequestDispatcher("./admin/admin_view_user.jsp").forward(request, response);			
 		}

@@ -55,6 +55,7 @@ public class MatchManager extends HttpServlet {
 		if(action.equals("update")){
 			
 			String user = request.getParameter("user");
+			String book = request.getParameter("book");
 			String closenum = request.getParameter("closenum");
 			String farnum = request.getParameter("farnum");
 			
@@ -63,7 +64,7 @@ public class MatchManager extends HttpServlet {
 			
 			Session sess = HibernateUtil.getSessionFactory().openSession();
 			
-			Evaluation eval = (Evaluation) sess.get(Evaluation.class, request.getParameter("eval"));
+			Evaluation eval = (Evaluation) sess.get(Evaluation.class, Integer.parseInt(request.getParameter("eval")));
 			
 			String closestuser = this.mtch.getClosestUser(user, eval);
 			String farthestuser = this.mtch.getFarthestUser(user, eval);
@@ -97,7 +98,7 @@ public class MatchManager extends HttpServlet {
 			sess.getTransaction().commit();
 			sess.close();
 			
-			request.getRequestDispatcher("").forward(request, response);
+			request.getRequestDispatcher("./admin/admin_eval_mgmt.jsp").forward(request, response);
 		}
 		
 		if(action.equals("matchalgo")){

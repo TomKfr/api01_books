@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="com.books.model.Tmatch"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.books.model.Evaluation"%>
 <%@page import="java.util.List"%>
@@ -17,6 +18,7 @@
   	User u = (User) request.getSession().getAttribute("user");
   	User vieweduser = (User) request.getAttribute("vieweduser");
   	List<Evaluation> list = (List<Evaluation>) request.getAttribute("evalsuser");
+  	List<Tmatch> listmatch = (List<Tmatch>) request.getAttribute("matchsuser") ;
   %>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
@@ -68,6 +70,23 @@
 			
 			<div class="col-lg-12">
 				<h2>Match</h2>
+				<table class="table">
+				<%
+					if(listmatch!=null){
+						Iterator<Tmatch> it = listmatch.iterator();
+						out.println("<tr><th>Utilisateur 1</th><th>Utilisateur 2</th><th>Livre</th><th>Distance</th></tr>");
+						while(it.hasNext()){
+							Tmatch e = it.next();
+							%>
+							<tr><td><%=e.getUser1() %></td><td><%=e.getUser2() %></td><td><%=e.getBook() %></td><td><%=e.getClosest() %></td></tr>
+							<%
+						}
+					}
+					else{
+						out.println("<tr><td>Pas d'evals</td></tr>");
+					}
+				%>
+				</table>
 			</div>
 		</div>
 	</div>
