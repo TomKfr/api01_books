@@ -135,6 +135,19 @@ public class EvalManager extends HttpServlet {
 			System.out.println("forwarding ...");
 			request.getRequestDispatcher("/user/reader_add_eval.jsp").forward(request, response);
 		}
+		
+		if(action.equals("filter")){ 
+			
+			List<Evaluation> list = new ArrayList<Evaluation>();
+			if(request.getParameter("email")==null){
+				list = sess.createCriteria(Evaluation.class).list();
+			}
+			else{
+				list = sess.createCriteria(Evaluation.class).add(Restrictions.like("user", request.getParameter("email"))).list();
+			}
+			request.setAttribute("evals", list);
+			request.getRequestDispatcher("./admin/admin_eval_mgmt.jsp").forward(request, response);
+		}
 	}
 
 	/**

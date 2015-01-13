@@ -47,7 +47,7 @@
 			<h3>Rechercher par utilisateur</h3>
 			<form method="get" action="EvalManager">
 				<div class="form-group">
-				Email : <input type="text" name="email" placeholder="email"/>
+				Email : <input type="text" class="formy-control" name="email" placeholder="email"/>
 				<input type="hidden" name="action" value="filter">
 				<input class="btn btn-primary" type="submit"/>
 				</div>

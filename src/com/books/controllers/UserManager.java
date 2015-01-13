@@ -77,9 +77,13 @@ public class UserManager extends HttpServlet {
 				
 				sess.beginTransaction();
 				Query qry = sess.createQuery("delete User where email = :email");
-				qry.setString("email", email);
+				qry.setString("email", email).executeUpdate();
 				
-				int result = qry.executeUpdate();
+				qry = sess.createQuery("delete Evaluation where user = :email");
+				qry.setString("email", email).executeUpdate();
+				
+				qry = sess.createQuery("delete Tmatch where user1 = :email1 or user2 = :email2");
+				qry.setString("email1", email).setString("email2", email);
 				
 				sess.getTransaction().commit();
 				sess.close();
