@@ -64,8 +64,9 @@ public class UserManager extends HttpServlet {
 			request.setAttribute("result", "success");
 			request.getRequestDispatcher("./admin/user_mgmt.jsp").forward(request, response);
 			
-			String message = "Bonjour "+u.getName()+",\nVotre compte a été créé/modifié. Voici vos informations de connexion :\nEmail :"+u.getEmail()+"\nMot de passe : "+u.getPwd()+"\nCordialement,\nAdmin.";
-			MailUtil.sendMessage("Notification de création de compte", message, u.getEmail(), "tkieffer67@gmail.com");
+			//String message = "Bonjour "+u.getName()+",\nVotre compte a été créé/modifié. Voici vos informations de connexion :\nEmail :"+u.getEmail()+"\nMot de passe : "+u.getPwd()+"\nCordialement,\nAdmin.";
+			//MailUtil.sendMessage("Notification de création de compte", message, u.getEmail(), "tkieffer67@gmail.com");
+			System.out.println("envoi de mail : création/update user");
 		}
 		
 		if(action.equals("delete")){
