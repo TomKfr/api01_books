@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-import com.books.model.Evaluation;
 import com.books.model.User;
 import com.books.utilities.HibernateUtil;
+import com.books.utilities.MailUtil;
 import com.books.model.Tmatch;
 /**
  * Servlet implementation class MatchesHistory
@@ -73,6 +73,16 @@ public class MatchesHistory extends HttpServlet {
 			}
 			
 			sess.close();
+		}
+		else { 
+			if(request.getParameter("action").equals("update")) {
+				User u = (User) request.getSession().getAttribute("user");
+				String message = "Bonjour, l'utilisateur " + u.getName() +" souhaiterait une mise à jour des matches. ";
+				MailUtil.sendMessage("Demande de MAJ", message, "morgane.becret@gmail.com", u.getEmail());
+				request.getRequestDispatcher("user/reader_history_matches.jsp").forward(request,  response);
+			} else {
+				request.getRequestDispatcher("user/reader_history_matches.jsp").forward(request,  response);
+			}
 		}
 	}
 

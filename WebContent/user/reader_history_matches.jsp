@@ -42,6 +42,7 @@
 		<h1>Historique de vos matches </h1>
 	</header>
 	</div>
+	<div> <% out.println("<a href='MatchesHistory?action=update"+"' class='btn btn-primary'> Update Matches</a> "); %>
 	<div class="col-lg-offset-2 col-lg-8">
 		<table class="table">
 			<tr><th>Numéro</th><th>Utilisateur 1</th><th>Utilisateur 2</th><th>Livre</th><th>+ proche ?</th></tr>
@@ -52,7 +53,7 @@
 					out.println("<tr><td>"+m.getNum()+"</td><td>"+m.getUser1()+"</td><td>"+m.getUser2()+"</td><td>"+m.getBook()+"</td><td>"+m.getClosest()+"</td>");
 				}}
 				else{
-					out.println("<tr><td>Aucun livre évalué.</td></tr>");
+					out.println("<tr><td>Aucun match.</td></tr>");
 				}
 			%>
 		</table>
