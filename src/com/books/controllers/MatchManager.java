@@ -55,11 +55,9 @@ public class MatchManager extends HttpServlet {
 			
 			String user = request.getParameter("user");
 			String book = request.getParameter("book");
-			String closenum = request.getParameter("closenum");
-			String farnum = request.getParameter("farnum");
+			String matchnum = request.getParameter("matchnum");
 			
-			Tmatch closematch;
-			Tmatch farmatch;
+			Tmatch match;
 			
 			Session sess = HibernateUtil.getSessionFactory().openSession();
 			
@@ -70,30 +68,23 @@ public class MatchManager extends HttpServlet {
 			
 			sess.beginTransaction();
 			
-			if(closenum==null){ //Faire gaffe ici !!!!!!!
-				closematch = new Tmatch();
-				farmatch = new Tmatch();
+			if(matchnum==null){ //Faire gaffe ici !!!!!!!
+				match = new Tmatch();
 				
-				closematch.setBook(eval.getBook());
-				closematch.setClosest(true);
-				closematch.setUser1(user);
-				closematch.setUser2(closestuser);
+				match.setBook(eval.getBook());
+				match.setClosestuser(closestuser);
+				match.setFarthestuser(farthestuser);
+				match.setUser(user);
 				
-				farmatch.setBook(eval.getBook());
-				farmatch.setClosest(false);
-				farmatch.setUser1(user);
-				farmatch.setUser2(farthestuser);
 			}
 			else{
-				closematch = (Tmatch) sess.get(Tmatch.class, closenum);
-				farmatch = (Tmatch) sess.get(Tmatch.class, farnum);
+				match = (Tmatch) sess.get(Tmatch.class, matchnum);
 				
-				closematch.setUser2(closestuser);
-				farmatch.setUser2(farthestuser);
+				match.setClosestuser(closestuser);
+				match.setFarthestuser(farthestuser);
 			}
 			
-			sess.saveOrUpdate(closematch);
-			sess.saveOrUpdate(farmatch);
+			sess.saveOrUpdate(match);
 			sess.getTransaction().commit();
 			sess.close();
 			

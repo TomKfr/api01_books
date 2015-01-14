@@ -74,16 +74,16 @@
 				<%
 					if(listmatch!=null){
 						Iterator<Tmatch> it = listmatch.iterator();
-						out.println("<tr><th>Utilisateur 1</th><th>Utilisateur 2</th><th>Livre</th><th>Distance</th></tr>");
+						out.println("<tr><th>Utilisateur</th><th>Utilisateur le plus proche</th><th>Utilisateur le plus éloigné</th><th>Livre</th></tr>");
 						while(it.hasNext()){
 							Tmatch e = it.next();
 							%>
-							<tr><td><%=e.getUser1() %></td><td><%=e.getUser2() %></td><td><%=e.getBook() %></td><td><%=e.getClosest() %></td></tr>
+							<tr><td><%=e.getUser() %></td><td><%=e.getClosestuser() %></td><td><%=e.getFarthestuser() %></td><td><%=e.getBook() %></td></tr>
 							<%
 						}
 					}
 					else{
-						out.println("<tr><td>Pas d'evals</td></tr>");
+						out.println("<tr><td>Pas de match pour cet utilisateur</td></tr>");
 					}
 				%>
 				</table>

@@ -171,7 +171,7 @@ public class UserManager extends HttpServlet {
 			
 			User usr = (User) sess.get(User.class, email);
 			List<Evaluation> listeval = sess.createCriteria(Evaluation.class).add(Restrictions.eq("user", email)).list();
-			List<Tmatch> listmatch = sess.createCriteria(Tmatch.class).add(Restrictions.or(Restrictions.eq("user1", email),Restrictions.eq("user2", email))).list();
+			List<Tmatch> listmatch = sess.createCriteria(Tmatch.class).add(Restrictions.or(Restrictions.eq("user", email),Restrictions.eq("user2", email))).list();
 			
 			sess.close();
 			
