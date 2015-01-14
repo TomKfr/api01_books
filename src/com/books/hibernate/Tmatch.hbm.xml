@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 14 janv. 2015 16:30:53 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.books.hibernate.Tmatch" table="tmatch" catalog="api01">
+    <class name="com.books.model.Tmatch" table="tmatch" catalog="api01">
         <id name="num" type="java.lang.Integer">
             <column name="num" />
             <generator class="identity" />

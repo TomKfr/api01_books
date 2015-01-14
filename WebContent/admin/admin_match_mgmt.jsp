@@ -46,6 +46,7 @@
 					<option value="by score" <%=request.getSession().getAttribute("matchalgo")=="by score"?"selected":"" %>>By score</option>
 				</select>
 				<input type="hidden" name="action" value="matchalgo"/>
+				<input type="submit" class="btn btn-info"/>
 			</form>
 		</div>
 		<div class="col-lg-12">

@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 14 janv. 2015 16:30:53 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.books.hibernate.Books" table="books" catalog="api01">
+    <class name="com.books.model.Books" table="books" catalog="api01">
         <id name="isbn" type="string">
             <column name="isbn" length="13" />
             <generator class="assigned" />

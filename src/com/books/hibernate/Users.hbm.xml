@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 14 janv. 2015 16:30:53 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.books.hibernate.Users" table="users" catalog="api01">
+    <class name="com.books.model.User" table="users" catalog="api01">
         <id name="email" type="string">
             <column name="email" length="100" />
             <generator class="assigned" />
