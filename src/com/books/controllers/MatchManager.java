@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 import com.books.model.Evaluation;
 import com.books.model.Tmatch;
