@@ -15,19 +15,18 @@ import org.hibernate.Session;
 import com.books.model.Evaluation;
 import com.books.model.User;
 import com.books.utilities.HibernateUtil;
-
+import com.books.model.Tmatch;
 /**
- * Servlet implementation class EvalHistory
- * menu qui gère l'historique des évaluations
+ * Servlet implementation class MatchesHistory
  */
-@WebServlet("/EvalHistory")
-public class EvalHistory extends HttpServlet {
+@WebServlet("/MatchesHistory")
+public class MatchesHistory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EvalHistory() {
+    public MatchesHistory() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,20 +36,18 @@ public class EvalHistory extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if(request.getParameter("action").equals("seeHistory")) {
+		if(request.getParameter("action").equals("seeMatches")) {
 			Integer nbpages = (Integer) request.getAttribute("nbpages"); 
 			Integer  pagination = Integer.parseInt(request.getParameter("page"));
 			User u = (User) request.getSession().getAttribute("user");
 			if(pagination==null) pagination = 2;
 			
 			Session sess = HibernateUtil.getSessionFactory().openSession();
-			List<Evaluation> toDo=null;
-			List<Evaluation> res = null;
+			List<Tmatch> res=null;
 			try{
 				/*res = sess.createQuery("select eval.num, eval.user, book.titre, eval.quality, eval.subject, eval.desire, eval.read_author, eval.recommend, eval.score, eval.isvalidated from com.books.model.Evaluation as eval, com.books.model.User as user, com.books.model.Books as book where eval.user=user.email and book.isbn=eval.book and eval.isvalidated= 1")
 						.list();*/
-				res=sess.createQuery("select eval from com.books.model.Evaluation as eval, com.books.model.User as user where user.email=eval.user and eval.isvalidated=1").list();
-				toDo=sess.createQuery("select noteval from com.books.model.Evaluation as noteval, com.books.model.User as user where user.email=noteval.user and noteval.isvalidated=0").list();}
+				res=sess.createQuery("select match from com.books.model.Tmatch as match, com.books.model.User as user where match.user1=user.email or match.user2=user.email").list();}
 			catch (HibernateException he){
 				System.out.println("echec récupération des évaluations "+ he);
 			}
@@ -60,31 +57,22 @@ public class EvalHistory extends HttpServlet {
 			request.setAttribute("page", pagination);
 			System.out.println("num page : "+pagination);
 			
-			if(!res.isEmpty() || !toDo.isEmpty()){
+			if(!res.isEmpty()){
 				if(pagination!=nbpages){
-					if(!res.isEmpty())
-						request.setAttribute("eval", res.subList(pagination*20, pagination*20+19));
-					if(!toDo.isEmpty())
-						request.setAttribute("noteval", toDo.subList(pagination*20, pagination*20+19));
+						request.setAttribute("match", res.subList(pagination*20, pagination*20+19));
 				}
 				else{
 					System.out.println("blop");
-					if(!res.isEmpty())
-						request.setAttribute("eval", res.subList(pagination*20, res.size()-1));
-					if(!toDo.isEmpty())
-						request.setAttribute("noteval", toDo.subList(pagination*20, toDo.size()-1));
+						request.setAttribute("match", res.subList(pagination*20, res.size()-1));
 				}
-				request.getRequestDispatcher("user/reader_history_eval.jsp").forward(request, response);
+				request.getRequestDispatcher("user/reader_history_matches.jsp").forward(request, response);
 			}
 			else{
-				System.out.println("pas d'évaluations");
-				request.getRequestDispatcher("user/reader_books.jsp").forward(request, response);
+				System.out.println("pas de matches");
+				request.getRequestDispatcher("user/reader_history_matches.jsp").forward(request, response);
 			}
 			
 			sess.close();
-		}
-		if(request.getParameter("action").equals("submitEval")) {
-			
 		}
 	}
 

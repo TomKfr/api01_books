@@ -24,6 +24,9 @@ import com.books.utilities.HibernateUtil;
 
 /**
  * Servlet implementation class BooksController
+ * menu qui gère les fonctionnalités liées aux livres pour un utilisateur lambda
+ * @author Morgane et Thomas
+ * 
  */
 @WebServlet("/BooksController")
 public class BooksController extends HttpServlet {
@@ -43,7 +46,7 @@ public class BooksController extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		
-		if(action.equals("searchBooks")) {
+		/*if(action.equals("searchBooks")) {
 			Integer nbpages = (Integer) request.getAttribute("nbpages"); 
 			Integer  pagination = Integer.parseInt(request.getParameter("page"));
 			User u = (User) request.getSession().getAttribute("user");
@@ -83,8 +86,10 @@ public class BooksController extends HttpServlet {
 			}
 			
 			sess.close();
-		}
-		
+		}*/
+		/**
+		 * ajout d'un livre
+		 */
 		if(action.equals("add")) {
 			System.out.println("adding ...");
 			Session sess = HibernateUtil.getSessionFactory().openSession();
@@ -127,7 +132,9 @@ public class BooksController extends HttpServlet {
 			request.setAttribute("books", list);
 			request.getRequestDispatcher("./user/reader_add_book.jsp").forward(request, response);
 		}
-		
+		/**
+		 * affichage de la page d'accueil du menu
+		 */
 		if(action.equals("index")){
 			List<Books> list = new ArrayList<Books>();
 			request.setAttribute("books", list);

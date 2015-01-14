@@ -21,6 +21,8 @@ import com.books.utilities.HibernateUtil;
 
 /**
  * Servlet implementation class BookMgmt
+ * servlet qui gère la partie Book Management de l'application 
+ * @author Morgane et Thomas
  */
 @WebServlet("/BookMgmt")
 public class BookMgmt extends HttpServlet {
@@ -40,11 +42,16 @@ public class BookMgmt extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		System.out.println("action : "+action);
-		
+		/**
+		 * affichage de la page d'accueil du menu
+		 */
 		if(action.equals("index")){
 			System.out.println("forwarding ...");
 			request.getRequestDispatcher("./admin/book_mgmt.jsp").forward(request, response);
 		}
+		/**
+		 * ajout d'un livre par l'administrateur
+		 */
 		if(action.equals("add")){
 			System.out.println("adding ...");
 			Session sess = HibernateUtil.getSessionFactory().openSession();
@@ -64,6 +71,9 @@ public class BookMgmt extends HttpServlet {
 			request.setAttribute("exec", "success");
 			request.getRequestDispatcher("./admin/book_mgmt.jsp").forward(request, response);
 		}
+		/**
+		 * recherche d'un livre
+		 */
 		if(action.equals("search")){
 			System.out.println("searching ...");
 			
@@ -108,6 +118,9 @@ public class BookMgmt extends HttpServlet {
 			System.out.println("nbpages :"+request.getAttribute("nbpages"));
 			request.getRequestDispatcher("./admin/book_mgmt.jsp").forward(request, response);
 		}
+		/**
+		 * suppression d'un livre
+		 */
 		if(action.equals("delete")){
 			
 			String book = request.getParameter("book");
@@ -125,6 +138,9 @@ public class BookMgmt extends HttpServlet {
 			request.getRequestDispatcher("BookMgmt?action=search&isbn=").forward(request, response);
 			
 		}
+		/**
+		 * modification d'un livre
+		 */
 		if(action.equals("modify")){
 			Session sess = HibernateUtil.getSessionFactory().openSession();
 			sess.beginTransaction();
