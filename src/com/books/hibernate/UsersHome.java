@@ -1,6 +1,6 @@
 package com.books.hibernate;
 
-// Generated 17 déc. 2014 18:20:35 by Hibernate Tools 3.4.0.CR1
+// Generated 14 janv. 2015 16:30:53 by Hibernate Tools 3.4.0.CR1
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import com.books.model.User;
 
 /**
  * Home object for domain model class Users.
- * @see com.books.hibernate.User
+ * @see com.books.hibernate.Users
  * @author Hibernate Tools
  */
 public class UsersHome {

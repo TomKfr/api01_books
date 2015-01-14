@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 7 janv. 2015 16:18:42 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 14 janv. 2015 16:30:53 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.books.model.Evaluation" table="evaluation" catalog="api01">
+    <class name="com.books.hibernate.Evaluation" table="evaluation" catalog="api01">
         <id name="num" type="java.lang.Integer">
             <column name="num" />
             <generator class="identity" />
