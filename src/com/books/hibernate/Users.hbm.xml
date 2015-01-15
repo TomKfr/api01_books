@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 17 d?c. 2014 18:20:35 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 14 janv. 2015 16:30:53 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.books.model.User" table="users" catalog="api01">
         <id name="email" type="string">

@@ -46,6 +46,7 @@
 					<option value="by score" <%=request.getSession().getAttribute("matchalgo")=="by score"?"selected":"" %>>By score</option>
 				</select>
 				<input type="hidden" name="action" value="matchalgo"/>
+				<input type="submit" class="btn btn-info"/>
 			</form>
 		</div>
 		<div class="col-lg-12">
@@ -53,14 +54,14 @@
 		</div>
 		<div class="col-lg-12">
 			<table class="table">
-				<tr><th>Utilisateur 1</th><th>Utilisateur 2</th><th>Livre</th><th>Distance</th><th>Action</th></tr>
+				<tr><th>Utilisateur</th><th>Livre</th><th>Utilisateur le plus proche</th><th>Utilisateur le plus éloigné</th><th>Action</th></tr>
 				<%
 					if(list!=null){
 						Iterator<Tmatch> it = list.iterator();
 						while(it.hasNext()){
 							Tmatch m = it.next();
 							%>
-							<tr><td><%=m.getUser1() %></td><td><%=m.getUser2() %></td><td><%=m.getBook() %></td><td><%=m.getClosest()?"Le plus proche":"Le plus éloigné" %></td><td><a href="" class="btn btn-danger">Supprimer</a></td></tr>
+							<tr><td><%=m.getUser() %></td><td><%=m.getBook() %></td><td><%=m.getClosestuser() %></td><td><%=m.getFarthestuser() %></td><td><a href="MatchManager?action=delete&num=<%=m.getNum() %>" class="btn btn-danger">Supprimer</a></td></tr>
 							<%
 						}
 					}

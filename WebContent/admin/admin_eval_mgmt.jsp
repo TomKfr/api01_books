@@ -42,6 +42,7 @@
 	<header class="page-header">
 		<h1>Gestion des évaluations </h1>
 	</header>
+	${result }
 	<div class="container">
 		<div class="col-lg-12">
 			<h3>Rechercher par utilisateur</h3>
@@ -62,7 +63,6 @@
 							Evaluation evl = it.next();
 							out.println("<tr><td>"+evl.getUser()+"</td><td>"+evl.getBook()+"</td><td>"+evl.getQuality()+"</td><td>"+evl.getSubject()+"</td><td>"+evl.getDesire()+"</td><td>"+evl.getReadAuthor()+"</td><td>"+evl.getRecommend()+"</td><td>"+evl.getScore()+"</td><td>"+evl.getIsvalidated()+"</td>");
 							out.println("<td><a href='MatchManager?action=update&user="+evl.getUser()+"&book="+evl.getBook()+"&eval="+evl.getNum()+"' class='btn btn-primary'>Update Matches</a>  <a href='EvalManager?action=delete&num="+evl.getNum()+"' class='btn btn-danger'>Supprimer</a></td></tr>");
-							System.out.println("numeval :"+evl.getNum());
 						}
 					}
 					else{
