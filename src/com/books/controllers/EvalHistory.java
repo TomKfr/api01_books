@@ -37,6 +37,7 @@ public class EvalHistory extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		User usr = (User) request.getSession().getAttribute("user");
 		if(request.getParameter("action").equals("seeHistory")) {
 			Integer nbpages = (Integer) request.getAttribute("nbpages"); 
 			Integer  pagination = Integer.parseInt(request.getParameter("page"));
@@ -84,7 +85,45 @@ public class EvalHistory extends HttpServlet {
 			sess.close();
 		}
 		if(request.getParameter("action").equals("submitEval")) {
+			User u = (User) request.getSession().getAttribute("user");
+			Session sess = HibernateUtil.getSessionFactory().openSession();
+			sess.beginTransaction();
+			String num = request.getParameter("numeval");
 			
+			Evaluation e = (Evaluation) sess.get(Evaluation.class, num);
+			
+			request.setAttribute("modifeval", e);
+			
+			request.getRequestDispatcher("user/reader_save_eval.jsp").forward(request,  response);
+		}
+		if(request.getParameter("action").equals("send")) {
+			Session sess = HibernateUtil.getSessionFactory().openSession();
+			int q = Integer.parseInt(request.getParameter("quality"));
+			int s = Integer.parseInt(request.getParameter("subject"));
+			int d = Integer.parseInt(request.getParameter("desire"));
+			int ra = Integer.parseInt(request.getParameter("read_author"));
+			int r = Integer.parseInt(request.getParameter("recommend"));
+			double note= (double) (q+s+d+ra+r)/5;
+			
+			Evaluation eval=new Evaluation();
+			eval.setBook(request.getParameter("book"));
+			eval.setUser( usr.getEmail());
+			eval.setQuality(q);
+			eval.setSubject(s);
+			eval.setDesire(d);
+			eval.setReadAuthor(ra);
+			eval.setRecommend(r);
+			eval.setScore(note);
+			eval.setIsvalidated(true);
+			
+		
+			sess.beginTransaction();
+			sess.saveOrUpdate(eval);
+			sess.getTransaction().commit();
+			
+			sess.close();
+			
+			request.getRequestDispatcher("EvalHistory?action=seeHistory").forward(request, response);
 		}
 	}
 
