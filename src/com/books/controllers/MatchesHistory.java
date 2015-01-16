@@ -47,7 +47,7 @@ public class MatchesHistory extends HttpServlet {
 			try{
 				/*res = sess.createQuery("select eval.num, eval.user, book.titre, eval.quality, eval.subject, eval.desire, eval.read_author, eval.recommend, eval.score, eval.isvalidated from com.books.model.Evaluation as eval, com.books.model.User as user, com.books.model.Books as book where eval.user=user.email and book.isbn=eval.book and eval.isvalidated= 1")
 						.list();*/
-				res=sess.createQuery("select match from com.books.model.Tmatch as match, com.books.model.User as user where match.user1=user.email or match.user2=user.email").list();}
+				res=sess.createQuery("select match from com.books.model.Tmatch as match, com.books.model.User as user where match.user=user.email").list();}
 			catch (HibernateException he){
 				System.out.println("echec récupération des évaluations "+ he);
 			}
@@ -78,7 +78,7 @@ public class MatchesHistory extends HttpServlet {
 			if(request.getParameter("action").equals("update")) {
 				User u = (User) request.getSession().getAttribute("user");
 				String message = "Bonjour, l'utilisateur " + u.getName() +" souhaiterait une mise à jour des matches. ";
-				MailUtil.sendMessage("Demande de MAJ", message, "morgane.becret@gmail.com", u.getEmail());
+				MailUtil.sendMessage("Demande de MAJ", message, "tkieffer67@gmail.com", u.getEmail());
 				request.getRequestDispatcher("user/reader_history_matches.jsp").forward(request,  response);
 			} else {
 				request.getRequestDispatcher("user/reader_history_matches.jsp").forward(request,  response);

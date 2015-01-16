@@ -45,12 +45,12 @@
 	<div> <% out.println("<a href='MatchesHistory?action=update"+"' class='btn btn-primary'> Update Matches</a> "); %>
 	<div class="col-lg-offset-2 col-lg-8">
 		<table class="table">
-			<tr><th>Numéro</th><th>Utilisateur 1</th><th>Utilisateur 2</th><th>Livre</th><th>+ proche ?</th></tr>
+			<tr><th>Numéro</th><th>User le + proche </th><th>User le + loin</th><th>Livre</th></tr>
 			<%
 				if(match!=null){
 				while(it.hasNext()){
 					Tmatch m = (Tmatch) it.next();
-					out.println("<tr><td>"+m.getNum()+"</td><td>"+m.getUser1()+"</td><td>"+m.getUser2()+"</td><td>"+m.getBook()+"</td><td>"+m.getClosest()+"</td>");
+					out.println("<tr><td>"+m.getNum()+"</td><td>"+m.getClosestuser()+"</td><td>"+m.getFarthestuser()+"</td><td>"+m.getBook()+"</td>");
 				}}
 				else{
 					out.println("<tr><td>Aucun match.</td></tr>");

@@ -88,7 +88,7 @@ public class EvalHistory extends HttpServlet {
 			User u = (User) request.getSession().getAttribute("user");
 			Session sess = HibernateUtil.getSessionFactory().openSession();
 			sess.beginTransaction();
-			String num = request.getParameter("numeval");
+			int num = Integer.parseInt(request.getParameter("numeval"));
 			
 			Evaluation e = (Evaluation) sess.get(Evaluation.class, num);
 			
@@ -106,6 +106,8 @@ public class EvalHistory extends HttpServlet {
 			double note= (double) (q+s+d+ra+r)/5;
 			
 			Evaluation eval=new Evaluation();
+			int num= Integer.parseInt(request.getParameter("num"));
+			eval.setNum(num);
 			eval.setBook(request.getParameter("book"));
 			eval.setUser( usr.getEmail());
 			eval.setQuality(q);

@@ -52,14 +52,14 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h2>Enregistrer une évaluation</h2>
-				<form method="get" action="EvalHistory" class="col-lg-offset-3 col-lg-6">
+				<form method="get" action="EvalHistory?action=send" class="col-lg-offset-3 col-lg-6">
 				<div class="form-group">
 						<label for="num">Numéro</label>
 						<input type="text" class="form-control" id="num" value="<%=eval.getNum()+" disabled" %> name="num">
 					</div>
 					<div class="form-group">
 						<label for="user">Utilisateur</label>
-						<input type="text" class="form-control" id="user" value="<%=usr.getEmail().isEmpty()?'"':usr.getEmail()+'"'+" disabled" %> name="email">
+						<input type="text" class="form-control" id="user" value="<%=usr.getEmail().isEmpty()?'"':usr.getEmail()+'"'+" disabled" %> name="email"> 
 					</div>
 
 					<div class="form-group">
