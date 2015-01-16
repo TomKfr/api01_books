@@ -30,7 +30,7 @@
 				<a class="navbar-brand" href="logout.jsp">Mon beau site</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="${pageContext.request.contextPath}/user/reader_add_book.jsp">Find a book</a></li>
+				<li><a href="${pageContext.request.contextPath}/BooksController?action=index">Find a book</a></li>
 				<li><a href="EvalHistory?action=seeHistory&page=0">My books</a></li>
 				<li><a href="MatchesHistory?action=seeMatches&page=0">My matches</a></li>
 			</ul>
