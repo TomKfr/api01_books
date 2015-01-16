@@ -91,12 +91,13 @@ public class EvalHistory extends HttpServlet {
 			int num = Integer.parseInt(request.getParameter("numeval"));
 			
 			Evaluation e = (Evaluation) sess.get(Evaluation.class, num);
-			
+			request.setAttribute("user",  u);
 			request.setAttribute("modifeval", e);
 			
 			request.getRequestDispatcher("user/reader_save_eval.jsp").forward(request,  response);
 		}
 		if(request.getParameter("action").equals("send")) {
+		
 			Session sess = HibernateUtil.getSessionFactory().openSession();
 			int q = Integer.parseInt(request.getParameter("quality"));
 			int s = Integer.parseInt(request.getParameter("subject"));
@@ -109,7 +110,7 @@ public class EvalHistory extends HttpServlet {
 			int num= Integer.parseInt(request.getParameter("num"));
 			eval.setNum(num);
 			eval.setBook(request.getParameter("book"));
-			eval.setUser( usr.getEmail());
+			eval.setUser(request.getParameter("user"));
 			eval.setQuality(q);
 			eval.setSubject(s);
 			eval.setDesire(d);

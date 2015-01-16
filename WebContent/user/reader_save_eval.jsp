@@ -55,16 +55,16 @@
 				<form method="get" action="EvalHistory?action=send" class="col-lg-offset-3 col-lg-6">
 				<div class="form-group">
 						<label for="num">Numéro</label>
-						<input type="text" class="form-control" id="num" value="<%=eval.getNum()+" disabled" %> name="num">
+						<input type="text" class="form-control" id="num" value="<%=eval.getNum()%>" disabled name="num">
 					</div>
 					<div class="form-group">
 						<label for="user">Utilisateur</label>
 						<input type="text" class="form-control" id="user" value="<%=usr.getEmail().isEmpty()?'"':usr.getEmail()+'"'+" disabled" %> name="email"> 
 					</div>
-
+					
 					<div class="form-group">
 						<label for="book">Livre</label>
-						<input type="text" class="form-control" id="book" value="<%=eval.getBook() %>" name="book">
+						<input type="text" class="form-control" id="book" value="<%=eval.getBook() %>" disabled name="book">
 					</div>
 					<div class="form-group">
 						<label for="quality">Qualité d'écriture :</label>
@@ -106,7 +106,9 @@
 						<INPUT type= "radio" name="recommend" value="3" checked=<%=eval.getRecommend()==3?"checked":"" %>> 3
 						<INPUT type= "radio" name="recommend" value="4" checked=<%=eval.getRecommend()==4?"checked":"" %>> 4
 					</div>
-					
+					<input type="hidden" name="num" value="<%=eval.getNum()%>"/>
+					<input type="hidden" name="book" value="<%=eval.getBook()%>"/>
+					<input type="hidden" name="user" value="<%=usr.getEmail()%>"/>
 					<input type="hidden" name="action" value="send"/>
 					<div class="col-lg-3">
 						<input type="submit" class="btn btn-primary" value="Soumettre">
