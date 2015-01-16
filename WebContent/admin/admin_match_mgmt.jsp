@@ -50,8 +50,11 @@
 				<input type="submit" class="btn btn-info"/>
 			</form>
 		</div>
-		<div class="col-lg-12">
+		<div class="col-lg-11">
 			<h2>Liste des associations :</h2>
+		</div>
+		<div class="col-lg-1">
+			<a href="MatchManager?action=updateall" class="btn btn-danger">Tout mettre à jour !</a>
 		</div>
 		<div class="col-lg-12">
 			<table class="table">

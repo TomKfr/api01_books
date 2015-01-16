@@ -1,6 +1,7 @@
 package com.books.controllers;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -33,7 +34,7 @@ public class MatchManager extends HttpServlet {
      */
     public MatchManager() {
         super();
-        this.updateMatchingAlgo("by score");
+        this.updateMatchingAlgo("byscore");
     }
 
 	/**
@@ -72,6 +73,7 @@ public class MatchManager extends HttpServlet {
 			
 			sess.beginTransaction();
 			
+			System.out.println("*********** size : "+list.size());
 			if(list.size()==0){
 				
 				System.out.println("pas d'ancien match");
@@ -88,13 +90,12 @@ public class MatchManager extends HttpServlet {
 				match = list.get(0);
 				System.out.println("old closest :"+match.getClosestuser());
 				System.out.println("new closest :"+closestuser);
-				if((match.getClosestuser()!=closestuser) || (match.getFarthestuser()!=farthestuser)){
+				if(!(closestuser.equals(match.getClosestuser()) && farthestuser.equals(match.getFarthestuser()))){
 					//MailUtil.sendMessage("Un nouveau match a été trouvé pour votre profil", "Votre évaluation pour le livre n°"+eval.getBook()+" a matché avec de nouveaux utilisateurs :\nUtilisateur le plus proche : "+closestuser+"\nUtilisateur le plus éloigné : "+farthestuser, user, "tkieffer67@gmail.com");
 					System.out.println("envoi de mail : nouveaux matchs !");
+					match.setClosestuser(closestuser);
+					match.setFarthestuser(farthestuser);
 				}
-				
-				match.setClosestuser(closestuser);
-				match.setFarthestuser(farthestuser);
 			}
 			
 			sess.saveOrUpdate(match);
@@ -123,11 +124,14 @@ public class MatchManager extends HttpServlet {
 			
 			request.getRequestDispatcher("MatchManager?action=index").forward(request, response);
 		}
+		
+		if(action.equals("updateall")){
+			this.update_all_matches();
+			request.getRequestDispatcher("MatchManager?action=index").forward(request, response);
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
@@ -137,5 +141,63 @@ public class MatchManager extends HttpServlet {
 		case "byscore" : { this.mtch = new MatchByScore(); System.out.println("matchalgo = byscore");break;}
 		case "random" : {this.mtch = new MatchRandom(); System.out.println("matchalgo = random");break;}
 		}
+	}
+	
+	private void update_all_matches(){
+		System.out.println("mise à jour de toutes les match !!!");
+		
+		Session sess = HibernateUtil.getSessionFactory().openSession();
+		sess.beginTransaction();
+		
+		List<Evaluation> list = sess.createCriteria(Evaluation.class).list();
+		System.out.println("nombre d'evals : "+list.size());
+		Iterator<Evaluation> it = list.iterator();
+		
+		Evaluation e;
+		String user;
+		String book;
+		String closestuser;
+		String farthestuser;
+		Tmatch existing_match;
+		while(it.hasNext()){
+			
+			e = it.next();
+			user = e.getUser();
+			book = e.getBook();
+			existing_match = null;
+			existing_match = (Tmatch) sess.createQuery("from Tmatch where user = :user and book = :book").setString("user", user).setString("book", book).uniqueResult();
+			
+			closestuser = this.mtch.getClosestUser(user, e);
+			farthestuser = this.mtch.getFarthestUser(user, e);
+			
+			if(existing_match==null){
+				
+				System.out.println("pas d'ancien match");
+				
+				existing_match = new Tmatch();
+				
+				existing_match.setBook(e.getBook());
+				existing_match.setClosestuser(closestuser);
+				existing_match.setFarthestuser(farthestuser);
+				existing_match.setUser(user);
+				
+			}
+			else{
+				System.out.println("old closest :"+existing_match.getClosestuser());
+				System.out.println("new closest :"+closestuser);
+				if(!(closestuser.equals(existing_match.getClosestuser()) && farthestuser.equals(existing_match.getFarthestuser()))){
+					//MailUtil.sendMessage("Un nouveau match a été trouvé pour votre profil", "Votre évaluation pour le livre n°"+eval.getBook()+" a matché avec de nouveaux utilisateurs :\nUtilisateur le plus proche : "+closestuser+"\nUtilisateur le plus éloigné : "+farthestuser, user, "tkieffer67@gmail.com");
+					System.out.println("envoi de mail : nouveaux matchs !");
+					existing_match.setClosestuser(closestuser);
+					existing_match.setFarthestuser(farthestuser);
+				}
+			}
+			
+			sess.saveOrUpdate(existing_match);
+		}
+		
+		sess.getTransaction().commit();
+		sess.close();
+		System.out.println("fin de la mise à jour de tous les matchs");
 	}
 }
