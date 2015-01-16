@@ -65,7 +65,7 @@ public class UserManager extends HttpServlet {
 			request.getRequestDispatcher("./admin/user_mgmt.jsp").forward(request, response);
 			
 			String message = "Bonjour "+u.getName()+",\nVotre compte a été créé/modifié. Voici vos informations de connexion :\nEmail :"+u.getEmail()+"\nMot de passe : "+u.getPwd()+"\nCordialement,\nAdmin.";
-			MailUtil.sendMessage("Notification de création de compte", message, u.getEmail(), "tkieffer67@gmail.com");
+			//MailUtil.sendMessage("Notification de création de compte", message, u.getEmail(), "tkieffer67@gmail.com");
 			System.out.println("envoi de mail : création/update user");
 		}
 		
@@ -119,6 +119,7 @@ public class UserManager extends HttpServlet {
 			List<User> list = new ArrayList<User>();
 			
 			String email = request.getParameter("email");
+			if(email==null) email = "";
 			System.out.println("email : "+email);
 			if(!email.isEmpty()){
 				User u = (User) sess.get(User.class, email);
@@ -126,6 +127,7 @@ public class UserManager extends HttpServlet {
 			}
 			else{
 				String nom = request.getParameter("nom");
+				if(nom==null) nom = "";
 				if(!nom.isEmpty()){
 					list = sess
 							.createCriteria(User.class)
@@ -146,13 +148,15 @@ public class UserManager extends HttpServlet {
 			}
 
 			Integer nbpages;
-			if(nbpagesstr==null) nbpages = Math.round(list.size()/7);
+			if(nbpagesstr==null) nbpages = (int) Math.ceil(list.size()/7)+1;
 			else nbpages = Integer.parseInt(nbpagesstr);
 			Integer page;
 			if(pagestr==null) page = 1;
 			else page = Integer.parseInt(pagestr);
 			
-			list = list.subList((page-1)*7+1, Math.min(list.size(), (page*7)));
+			System.out.println("nbpages : "+nbpages+"\npage : "+page);
+			
+			list = list.subList((page-1)*7, Math.min(list.size(), (page*7)));
 			
 			request.setAttribute("search", list);
 			request.setAttribute("nbpages", nbpages);

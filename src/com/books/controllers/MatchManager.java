@@ -17,6 +17,7 @@ import com.books.model.Tmatch;
 import com.books.utilities.HibernateUtil;
 import com.books.utilities.MailUtil;
 import com.books.utilities.MatchByScore;
+import com.books.utilities.MatchRandom;
 import com.books.utilities.MatchingAlgo;
 
 /**
@@ -105,6 +106,9 @@ public class MatchManager extends HttpServlet {
 		
 		if(action.equals("matchalgo")){
 			this.updateMatchingAlgo(request.getParameter("matchalgo"));
+			System.out.println("changement d'algo de macth : "+request.getParameter("matchalgo"));
+			request.getSession().setAttribute("matchalgo", request.getParameter("matchalgo"));
+			request.getRequestDispatcher("MatchManager?action=index").forward(request, response);
 		}
 		
 		if(action.equals("delete")){
@@ -130,7 +134,8 @@ public class MatchManager extends HttpServlet {
 	
 	private void updateMatchingAlgo(String a){
 		switch(a){
-		case "by score" : this.mtch = new MatchByScore();
+		case "byscore" : { this.mtch = new MatchByScore(); System.out.println("matchalgo = byscore");break;}
+		case "random" : {this.mtch = new MatchRandom(); System.out.println("matchalgo = random");break;}
 		}
 	}
 }

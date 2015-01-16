@@ -140,7 +140,7 @@
   					if(list!=null){
   					Integer pg = (Integer) request.getAttribute("page");
   					System.out.println("nbpages :"+request.getAttribute("nbpages"));
-  					for(int i=1;i<((Integer) request.getAttribute("nbpages"))+2;i++){
+  					for(int i=1;i<((Integer) request.getAttribute("nbpages"))+1;i++){
   						out.println("<li");
   						if(i==pg) out.println("class='active'");
   						out.println("><a href='?page="+i+"&isbn="+request.getParameter("isbn")+"&titre="+request.getParameter("titre")+"&action=search'>"+i+"</a></li>");

@@ -43,7 +43,8 @@
 			<form class="form-horizontal" method="get" action="MatchManager">
 				<label id="label-1">Choisir l'algorithme d'association :</label>
 				<select class="form-control" name="matchalgo">
-					<option value="by score" <%=request.getSession().getAttribute("matchalgo")=="by score"?"selected":"" %>>By score</option>
+					<option value="byscore" <%=request.getSession().getAttribute("matchalgo")=="byscore"?"selected":"" %>>By score</option>
+					<option value="random" <%=request.getSession().getAttribute("matchalgo")=="random"?"selected":"" %>>Randomly</option>
 				</select>
 				<input type="hidden" name="action" value="matchalgo"/>
 				<input type="submit" class="btn btn-info"/>

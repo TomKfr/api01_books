@@ -8,14 +8,13 @@ import org.hibernate.criterion.Restrictions;
 
 import com.books.model.Evaluation;
 
-public class MatchByScore implements MatchingAlgo {
-	
+public class MatchRandom implements MatchingAlgo {
 	private String user;
 	private String book;
 	private String closestuser;
 	private String farthestuser;
 	
-	public MatchByScore() {
+	public MatchRandom() {
 		this.user=null;
 		this.book=null;
 		this.closestuser=null;
@@ -30,30 +29,27 @@ public class MatchByScore implements MatchingAlgo {
 		Session sess = HibernateUtil.getSessionFactory().openSession();
 		List<Evaluation> list = sess.createCriteria(Evaluation.class).add(Restrictions.eq("book", this.book)).add(Restrictions.not(Restrictions.eq("user", user))).list();
 		if(list.size()>0){
-			Double score = eval.getScore();
-			Iterator<Evaluation> it = list.iterator();
-			Evaluation e;
-			Double c_eloign = (double) 1000;
-			Double f_eloign = (double) 0;
-			do{
-				e = it.next();
-				System.out.println("eval : "+e.getNum()+" user : "+e.getUser());
-				if(c_eloign>Math.abs(eval.getScore()-e.getScore())){
-					this.closestuser = e.getUser();
-					c_eloign = Math.abs(eval.getScore()-e.getScore());
-				}
-				if(f_eloign<Math.abs(eval.getScore()-e.getScore())){
-					this.farthestuser = e.getUser();
-					f_eloign = Math.abs(eval.getScore()-e.getScore());
-				}
-			}while(it.hasNext());
+			
+			double x = Math.random()*(list.size()-1);
+			int index = (int) Math.floor(x);
+			
+			this.closestuser = list.get(index).getUser();
+			if(list.size()>1){
+				list.remove(index);
+				
+				x = Math.random()*(list.size()-1);
+				index = (int) Math.floor(x);
+				
+				this.farthestuser = list.get(index).getUser();
+			}
+			else this.farthestuser=this.closestuser;
 		}
 	}
 
 	@Override
 	public String getClosestUser(String user, Evaluation eval) {
 		
-		System.out.println("getting closest user by score ...");
+		System.out.println("getting closest user randomly ...");
 		
 		if(this.user!=user || this.book!=eval.getBook()){
 			this.calculate(user, eval);
