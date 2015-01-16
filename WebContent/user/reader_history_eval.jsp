@@ -91,7 +91,7 @@
 				while(it2.hasNext()){
 					Evaluation e2 = (Evaluation) it2.next();
 					out.println("<tr><td>"+e2.getNum()+"</td><td>"+e2.getBook()+"</td>");
-					out.println("<td align='center'><a class='btn btn-info' href='EvalHistory?action=submitEval'>Poursuivre l'évaluation</a>");
+					out.println("<td align='center'><a class='btn btn-info' href='EvalHistory?action=submitEval&numeval="+e2.getNum()+"'>Poursuivre l'évaluation</a>");
 				}}
 				else{
 					out.println("<tr><td>Aucune évaluation en cours.</td></tr>");
