@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="java.util.Map"%>
 <%@page import="com.books.model.Books"%>
 <%@page import="com.books.model.Evaluation" %>
 <%@page import="com.books.model.User"%>
@@ -18,6 +19,7 @@
   	User u = (User) request.getSession().getAttribute("user");
   	List<Evaluation> eval = (List<Evaluation>) request.getAttribute("eval");
   	List<Evaluation> noteval=(List<Evaluation>) request.getAttribute("noteval");
+  	Map<String,String> titres = (Map<String,String>) request.getAttribute("titres");
 	Iterator<Evaluation> it=null;
 	Iterator<Evaluation> it2=null;
 	if(eval!=null) it = eval.iterator();
@@ -43,15 +45,14 @@
 	<header class="page-header">
 		<h1>Historique de vos évaluations </h1>
 	</header>
-	</div>
-	<div class="col-lg-offset-2 col-lg-8">
+	<div class="col-lg-12">
 		<table class="table">
 			<tr><th>Numéro</th><th>Livre</th><th>Qualité</th><th>Intérêt</th><th>Désir de poursuivre</th><th>Même auteur</th><th>Recommandé</th><th>Score</th></tr>
 			<%
 				if(eval!=null){
 				while(it.hasNext()){
 					Evaluation e = (Evaluation) it.next();
-					out.println("<tr><td>"+e.getNum()+"</td><td>"+e.getBook()+"</td><td>"+e.getQuality()+"</td><td>"+e.getSubject()+"</td><td>"+e.getDesire()+"</td><td>"+e.getReadAuthor()+"</td><td>"+e.getRecommend()+"</td><td>"+e.getScore()+"</td>");
+					out.println("<tr><td>"+e.getNum()+"</td><td>"+titres.get(e.getBook())+"</td><td>"+e.getQuality()+"</td><td>"+e.getSubject()+"</td><td>"+e.getDesire()+"</td><td>"+e.getReadAuthor()+"</td><td>"+e.getRecommend()+"</td><td>"+e.getScore()+"</td>");
 				}}
 				else{
 					out.println("<tr><td>Aucun livre évalué.</td></tr>");
@@ -82,15 +83,17 @@
   			</ul>
   		</nav>
 	</div>
+	<div class="col-lg-12">
 	<h1> Evaluations à terminer </h1>
-	<div class="col-lg-offset-2 col-lg-8">
+	</div>
+	<div class="col-lg-12">
 		<table class="table">
 			<tr><th>Numéro</th><th>Livre</th></tr>
 			<%
 				if(noteval!=null){
 				while(it2.hasNext()){
 					Evaluation e2 = (Evaluation) it2.next();
-					out.println("<tr><td>"+e2.getNum()+"</td><td>"+e2.getBook()+"</td>");
+					out.println("<tr><td>"+e2.getNum()+"</td><td>"+titres.get(e2.getBook())+"</td>");
 					out.println("<td align='center'><a class='btn btn-info' href='EvalHistory?action=submitEval&numeval="+e2.getNum()+"'>Poursuivre l'évaluation</a>");
 				}}
 				else{
@@ -98,6 +101,7 @@
 				}
 			%>
 		</table>
+	</div>
 	</div>
 		
 	<input type="hidden" name="action" value="seeHistory"/>

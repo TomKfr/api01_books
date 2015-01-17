@@ -1,7 +1,9 @@
 package com.books.controllers;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import com.books.model.Books;
 import com.books.model.Evaluation;
 import com.books.model.User;
 import com.books.utilities.HibernateUtil;
@@ -52,8 +55,17 @@ public class MatchesHistory extends HttpServlet {
 						.list();*/
 				res=sess.createCriteria(Tmatch.class).add(Restrictions.eq("user", email)).list();
 			} catch (HibernateException he){
-				System.out.println("echec récupération des évaluations "+ he);
+				System.out.println("echec récupération des matchs "+ he);
 			}
+			
+			//Liste d'association isbn - titre
+			Map<String,String> titres = new HashMap<String,String>();
+			//récupération des titres :
+			for(Tmatch e : res){
+				Books bk = (Books) sess.get(Books.class, e.getBook());
+				titres.put(bk.getIsbn(), bk.getTitre());
+			}
+			request.setAttribute("titres", titres);
 			
 			if(nbpages==null) nbpages = Math.round(res.size()/20);
 			request.setAttribute("nbpages", nbpages);

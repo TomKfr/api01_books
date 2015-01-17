@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="java.util.Map"%>
 <%@page import="com.books.model.Books"%>
 <%@page import="com.books.model.Tmatch"%>
 <%@page import="com.books.model.Evaluation" %>
@@ -18,6 +19,7 @@
   <%
   	User u = (User) request.getSession().getAttribute("user");
   	List<Tmatch> match = (List<Tmatch>) request.getAttribute("match");
+  	Map<String,String> titres = (Map<String,String>) request.getAttribute("titres");
 	Iterator<Tmatch> it=null;
 	if(match!=null) it = match.iterator();
 	Integer pg = (Integer) request.getAttribute("page");
@@ -50,7 +52,7 @@
 				if(match!=null){
 				while(it.hasNext()){
 					Tmatch m = (Tmatch) it.next();
-					out.println("<tr><td>"+m.getNum()+"</td><td>"+m.getClosestuser()+"</td><td>"+m.getFarthestuser()+"</td><td>"+m.getBook()+"</td>");
+					out.println("<tr><td>"+m.getNum()+"</td><td>"+m.getClosestuser()+"</td><td>"+m.getFarthestuser()+"</td><td>"+titres.get(m.getBook())+"</td>");
 				}}
 				else{
 					out.println("<tr><td>Aucun match.</td></tr>");
