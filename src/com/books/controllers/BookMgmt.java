@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
 
 import com.books.hibernate.BooksHome;
 import com.books.model.Books;
+import com.books.model.Evaluation;
+import com.books.model.Tmatch;
 import com.books.model.User;
 import com.books.utilities.HibernateUtil;
 
@@ -108,7 +111,7 @@ public class BookMgmt extends HttpServlet {
 			if(pagestr==null) page = 1;
 			else page = Integer.parseInt(pagestr);
 			
-			list = list.subList((page-1)*7+1, Math.min(list.size(), (page*7)));
+			list = list.subList((page-1)*7, Math.min(list.size(), (page*7)));
 			
 			request.setAttribute("search", list);
 			request.setAttribute("nbpages", nbpages);
@@ -132,6 +135,12 @@ public class BookMgmt extends HttpServlet {
 				.createQuery("delete from com.books.model.Books where isbn = :isbn")
 				.setString("isbn", book)
 				.executeUpdate();
+			
+			//Suppression des evals liées au livre
+			sess.createQuery("delete from Evaluation where book = :bk").setString("bk", book).executeUpdate();
+			//Suppression des evals liées au livre
+			sess.createQuery("delete from Tmatch where book = :bk").setString("bk", book).executeUpdate();
+			
 			sess.getTransaction().commit();
 			sess.close();
 			
@@ -152,8 +161,6 @@ public class BookMgmt extends HttpServlet {
 			
 			request.getRequestDispatcher("./admin/book_mgmt.jsp").forward(request, response);
 		}
-		
-		
 	}
 
 	/**

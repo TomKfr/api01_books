@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaQuery;
 import org.hibernate.criterion.Criterion;
@@ -22,6 +23,7 @@ import org.hibernate.criterion.SQLCriterion;
 import org.hibernate.engine.spi.TypedValue;
 import org.hibernate.loader.custom.sql.SQLCustomQuery;
 import org.hibernate.mapping.Collection;
+import org.hibernate.transform.Transformers;
 
 import com.books.model.Books;
 import com.books.model.Evaluation;
@@ -120,17 +122,17 @@ public class BooksController extends HttpServlet {
 			Session sess = HibernateUtil.getSessionFactory().openSession();
 			List<Books> list = new ArrayList<Books>();
 			
-			//On récupère les bouquins déjà évalués : Ne récupérer que l'attr book !!
-			//List deja_eval = sess.createCriteria(Evaluation.class)
-			//		.add(Restrictions.eq("user", request.getSession().getAttribute("user")))
-			//		.setProjection(Projections.property("book"))
-			//		.list();
+			//On récupère les bouquins déjà évalués : 
+			List<String> deja_eval = sess.createCriteria(Evaluation.class)
+					.add(Restrictions.eq("user", ((User) request.getSession().getAttribute("user")).getEmail()))
+					.setProjection(Projections.property("book"))
+					.list();
 						
 			if(!request.getParameter("isbn").isEmpty()){
 				
 				list = sess.createCriteria(Books.class)
 									.add(Restrictions.eq("isbn", request.getParameter("isbn")))
-									//.add(Restrictions.not(Restrictions.in("book", deja_eval)))
+									.add(Restrictions.not(Restrictions.in("isbn", deja_eval)))
 									.list();
 				System.out.println("recherche par isbn : "+request.getParameter("isbn"));
 			}
@@ -138,7 +140,7 @@ public class BooksController extends HttpServlet {
 				
 				list = sess.createCriteria(Books.class)
 							.add(Restrictions.like("titre", "%"+request.getParameter("titre")+"%"))
-							//.add(Restrictions.not(Restrictions.in("book", deja_eval)))
+							.add(Restrictions.not(Restrictions.in("isbn", deja_eval)))
 							.list();
 				System.out.println("recherche par titre : "+request.getParameter("titre"));
 			}
