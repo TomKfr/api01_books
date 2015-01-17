@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import com.books.model.Evaluation;
 import com.books.model.User;
@@ -47,12 +48,13 @@ public class EvalHistory extends HttpServlet {
 			Session sess = HibernateUtil.getSessionFactory().openSession();
 			List<Evaluation> toDo=null;
 			List<Evaluation> res = null;
+			String email=u.getEmail();
 			try{
 				/*res = sess.createQuery("select eval.num, eval.user, book.titre, eval.quality, eval.subject, eval.desire, eval.read_author, eval.recommend, eval.score, eval.isvalidated from com.books.model.Evaluation as eval, com.books.model.User as user, com.books.model.Books as book where eval.user=user.email and book.isbn=eval.book and eval.isvalidated= 1")
 						.list();*/
-				res=sess.createQuery("select eval from com.books.model.Evaluation as eval, com.books.model.User as user where user.email=eval.user and eval.isvalidated=1").list();
-				toDo=sess.createQuery("select noteval from com.books.model.Evaluation as noteval, com.books.model.User as user where user.email=noteval.user and noteval.isvalidated=0").list();}
-			catch (HibernateException he){
+				res=sess.createCriteria(Evaluation.class).add(Restrictions.and(Restrictions.eq("user", email),Restrictions.eq("isvalidated", true))).list();
+				toDo=sess.createCriteria(Evaluation.class).add(Restrictions.and(Restrictions.eq("user", email),Restrictions.eq("isvalidated", false))).list();
+			}catch (HibernateException he){
 				System.out.println("echec récupération des évaluations "+ he);
 			}
 			
@@ -79,7 +81,7 @@ public class EvalHistory extends HttpServlet {
 			}
 			else{
 				System.out.println("pas d'évaluations");
-				request.getRequestDispatcher("user/reader_books.jsp").forward(request, response);
+				request.getRequestDispatcher("user/EvalHistory?action=seeHistory&page=0").forward(request, response);
 			}
 			
 			sess.close();

@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
+import com.books.model.Evaluation;
 import com.books.model.User;
 import com.books.utilities.HibernateUtil;
 import com.books.utilities.MailUtil;
@@ -43,12 +45,13 @@ public class MatchesHistory extends HttpServlet {
 			if(pagination==null) pagination = 2;
 			
 			Session sess = HibernateUtil.getSessionFactory().openSession();
+			String email=u.getEmail();
 			List<Tmatch> res=null;
 			try{
 				/*res = sess.createQuery("select eval.num, eval.user, book.titre, eval.quality, eval.subject, eval.desire, eval.read_author, eval.recommend, eval.score, eval.isvalidated from com.books.model.Evaluation as eval, com.books.model.User as user, com.books.model.Books as book where eval.user=user.email and book.isbn=eval.book and eval.isvalidated= 1")
 						.list();*/
-				res=sess.createQuery("select match from com.books.model.Tmatch as match, com.books.model.User as user where match.user=user.email").list();}
-			catch (HibernateException he){
+				res=sess.createCriteria(Tmatch.class).add(Restrictions.eq("user", email)).list();
+			} catch (HibernateException he){
 				System.out.println("echec récupération des évaluations "+ he);
 			}
 			
