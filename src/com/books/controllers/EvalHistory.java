@@ -42,11 +42,12 @@ public class EvalHistory extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		User usr = (User) request.getSession().getAttribute("user");
+		
 		if(request.getParameter("action").equals("seeHistory")) {
 			Integer nbpages = (Integer) request.getAttribute("nbpages"); 
 			Integer  pagination = Integer.parseInt(request.getParameter("page"));
 			User u = (User) request.getSession().getAttribute("user");
-			if(pagination==null) pagination = 2;
+			if(pagination==null) pagination = 1;
 			
 			Session sess = HibernateUtil.getSessionFactory().openSession();
 			List<Evaluation> toDo=null;
@@ -81,28 +82,20 @@ public class EvalHistory extends HttpServlet {
 			System.out.println("num page : "+pagination);
 			
 			if(!res.isEmpty() || !toDo.isEmpty()){
-				if(pagination!=nbpages){
-					if(!res.isEmpty())
-						request.setAttribute("eval", res.subList(pagination*20, pagination*20+19));
-					if(!toDo.isEmpty())
-						request.setAttribute("noteval", toDo.subList(pagination*20, pagination*20+19));
-				}
-				else{
-					System.out.println("blop");
-					if(!res.isEmpty())
-						request.setAttribute("eval", res.subList(pagination*20, res.size()-1));
-					if(!toDo.isEmpty())
-						request.setAttribute("noteval", toDo.subList(pagination*20, toDo.size()-1));
-				}
+				if(!res.isEmpty())
+					request.setAttribute("eval", res.subList((pagination-1)*20, Math.min(pagination*20, res.size())));
+				if(!toDo.isEmpty())
+					request.setAttribute("noteval", toDo.subList((pagination-1)*20, Math.min(pagination*20, toDo.size())));
 				request.getRequestDispatcher("user/reader_history_eval.jsp").forward(request, response);
 			}
 			else{
 				System.out.println("pas d'évaluations");
-				request.getRequestDispatcher("user/EvalHistory?action=seeHistory&page=0").forward(request, response);
+				request.getRequestDispatcher("user/EvalHistory?action=seeHistory&page=1").forward(request, response);
 			}
 			
 			sess.close();
 		}
+		
 		if(request.getParameter("action").equals("submitEval")) {
 			User u = (User) request.getSession().getAttribute("user");
 			Session sess = HibernateUtil.getSessionFactory().openSession();

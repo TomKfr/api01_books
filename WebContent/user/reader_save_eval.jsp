@@ -35,7 +35,7 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="${pageContext.request.contextPath}/BooksController?action=index">Find a book</a></li>
-				<li><a href="${pageContext.request.contextPath}/EvalHistory?action=seeHistory&page=0">My books</a></li>
+				<li><a href="${pageContext.request.contextPath}/EvalHistory?action=seeHistory&page=1">My books</a></li>
 				<li><a href="${pageContext.request.contextPath}/MatchesHistory?action=seeMatches&page=0">My matches</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -68,43 +68,43 @@
 					</div>
 					<div class="form-group">
 						<label for="quality">Qualité d'écriture :</label>
-						<INPUT type= "radio" name="quality" value="0" <%=eval.getQuality()==0?"checked":"" %> > 0
-						<INPUT type= "radio" name="quality" value="1" <%=eval.getQuality()==1?"checked":"" %>> 1
-						<INPUT type= "radio" name="quality" value="2" <%=eval.getQuality()==2?"checked":"" %>> 2
-						<INPUT type= "radio" name="quality" value="3" <%=eval.getQuality()==3?"checked":"" %>> 3
-						<INPUT type= "radio" name="quality" value="4" <%=eval.getQuality()==4?"checked":"" %>> 4
+						<INPUT type= "radio" name="quality" value="0" <%=eval.getQuality()!=null?(eval.getQuality()==0?"checked":""):"" %>> 0
+						<INPUT type= "radio" name="quality" value="1" <%=eval.getQuality()!=null?(eval.getQuality()==1?"checked":""):"" %>> 1
+						<INPUT type= "radio" name="quality" value="2" <%=eval.getQuality()!=null?(eval.getQuality()==2?"checked":""):"" %>> 2
+						<INPUT type= "radio" name="quality" value="3" <%=eval.getQuality()!=null?(eval.getQuality()==3?"checked":""):"" %>> 3
+						<INPUT type= "radio" name="quality" value="4" <%=eval.getQuality()!=null?(eval.getQuality()==4?"checked":""):"" %>> 4
 					</div>
 					<div class="form-group">
 						<label for="titre">Intérêt pour le sujet du livre :</label>
-						<INPUT type= "radio" name="subject" value=0 <%=eval.getSubject()==0?"checked":"" %>> 0
-						<INPUT type= "radio" name="subject" value=1 <%=eval.getSubject()==1?"checked":"" %>> 1
-						<INPUT type= "radio" name="subject" value=2 <%=eval.getSubject()==2?"checked":"" %>> 2
-						<INPUT type= "radio" name="subject" value=3 <%=eval.getSubject()==3?"checked":"" %>> 3
-						<INPUT type= "radio" name="subject" value=4 <%=eval.getSubject()==4?"checked":"" %>> 4
+						<INPUT type= "radio" name="subject" value=0 <%=eval.getSubject()!=null?(eval.getSubject()==0?"checked":""):"" %>> 0
+						<INPUT type= "radio" name="subject" value=1 <%=eval.getSubject()!=null?(eval.getSubject()==1?"checked":""):"" %>> 1
+						<INPUT type= "radio" name="subject" value=2 <%=eval.getSubject()!=null?(eval.getSubject()==2?"checked":""):"" %>> 2
+						<INPUT type= "radio" name="subject" value=3 <%=eval.getSubject()!=null?(eval.getSubject()==3?"checked":""):"" %>> 3
+						<INPUT type= "radio" name="subject" value=4 <%=eval.getSubject()!=null?(eval.getSubject()==4?"checked":""):"" %>> 4
 					</div>
 					<div class="form-group">
 						<label for="titre">Désir de lire jusqu'à la fin :</label>
-						<INPUT type= "radio" name="desire" value="0" <%=eval.getDesire()==0?"checked":"" %>> 0
-						<INPUT type= "radio" name="desire" value="1" <%=eval.getDesire()==1?"checked":"" %>> 1
-						<INPUT type= "radio" name="desire" value="2" <%=eval.getDesire()==2?"checked":"" %>> 2
-						<INPUT type= "radio" name="desire" value="3" <%=eval.getDesire()==3?"checked":"" %>> 3
-						<INPUT type= "radio" name="desire" value="4" <%=eval.getDesire()==4?"checked":"" %>> 4
+						<INPUT type= "radio" name="desire" value="0" <%=eval.getDesire()!=null?(eval.getDesire()==0?"checked":""):"" %>> 0
+						<INPUT type= "radio" name="desire" value="1" <%=eval.getDesire()!=null?(eval.getDesire()==1?"checked":""):"" %>> 1
+						<INPUT type= "radio" name="desire" value="2" <%=eval.getDesire()!=null?(eval.getDesire()==2?"checked":""):"" %>> 2
+						<INPUT type= "radio" name="desire" value="3" <%=eval.getDesire()!=null?(eval.getDesire()==3?"checked":""):"" %>> 3
+						<INPUT type= "radio" name="desire" value="4" <%=eval.getDesire()!=null?(eval.getDesire()==4?"checked":""):"" %>> 4
 					</div>
 					<div class="form-group">
 						<label for="titre">Désir de lire un livre du même auteur :</label>
-						<INPUT type= "radio" name="read_author" value="0" <%=eval.getReadAuthor()==0?"checked":"" %>> 0
-						<INPUT type= "radio" name="read_author" value="1" <%=eval.getReadAuthor()==1?"checked":"" %>> 1
-						<INPUT type= "radio" name="read_author" value="2" <%=eval.getReadAuthor()==2?"checked":"" %>> 2
-						<INPUT type= "radio" name="read_author" value="3" <%=eval.getReadAuthor()==3?"checked":"" %>> 3
-						<INPUT type= "radio" name="read_author" value="4" <%=eval.getReadAuthor()==4?"checked":"" %>> 4
+						<INPUT type= "radio" name="read_author" value="0" <%=eval.getReadAuthor()!=null?(eval.getReadAuthor()==0?"checked":""):"" %>> 0
+						<INPUT type= "radio" name="read_author" value="1" <%=eval.getReadAuthor()!=null?(eval.getReadAuthor()==0?"checked":""):"" %>> 1
+						<INPUT type= "radio" name="read_author" value="2" <%=eval.getReadAuthor()!=null?(eval.getReadAuthor()==0?"checked":""):"" %>> 2
+						<INPUT type= "radio" name="read_author" value="3" <%=eval.getReadAuthor()!=null?(eval.getReadAuthor()==0?"checked":""):"" %>> 3
+						<INPUT type= "radio" name="read_author" value="4" <%=eval.getReadAuthor()!=null?(eval.getReadAuthor()==0?"checked":""):"" %>> 4
 					</div>
 					<div class="form-group">
 						<label for="titre">Désir de recommander le livre à un ami :</label>
-						<INPUT type= "radio" name="recommend" value="0" <%=eval.getRecommend()==0?"checked":"" %>> 0
-						<INPUT type= "radio" name="recommend" value="1" <%=eval.getRecommend()==1?"checked":"" %>> 1
-						<INPUT type= "radio" name="recommend" value="2" <%=eval.getRecommend()==2?"checked":"" %>> 2
-						<INPUT type= "radio" name="recommend" value="3" <%=eval.getRecommend()==3?"checked":"" %>> 3
-						<INPUT type= "radio" name="recommend" value="4" <%=eval.getRecommend()==4?"checked":"" %>> 4
+						<INPUT type= "radio" name="recommend" value="0" <%=eval.getRecommend()!=null?(eval.getRecommend()==0?"checked":""):"" %>> 0
+						<INPUT type= "radio" name="recommend" value="1" <%=eval.getRecommend()!=null?(eval.getRecommend()==1?"checked":""):"" %>> 1
+						<INPUT type= "radio" name="recommend" value="2" <%=eval.getRecommend()!=null?(eval.getRecommend()==2?"checked":""):"" %>> 2
+						<INPUT type= "radio" name="recommend" value="3" <%=eval.getRecommend()!=null?(eval.getRecommend()==3?"checked":""):"" %>> 3
+						<INPUT type= "radio" name="recommend" value="4" <%=eval.getRecommend()!=null?(eval.getRecommend()==4?"checked":""):"" %>> 4
 					</div>
 					<input type="hidden" name="num" value="<%=eval.getNum()%>"/>
 					<input type="hidden" name="book" value="<%=eval.getBook()%>"/>

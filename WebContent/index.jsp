@@ -1,4 +1,3 @@
-<%@ page import="java.io.*,java.util.*" %>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -14,7 +13,7 @@
   		String result = "";
   		String res = (String)request.getAttribute("result");
   		if(res == null) {
-  			result = "style="+'"'+"display:none"+'"';
+  			result = "style='display:none'";
   		}
   	%>
   	<div class="navbar navbar-inverse navbar-fixed-top">

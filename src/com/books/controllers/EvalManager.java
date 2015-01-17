@@ -69,12 +69,15 @@ public class EvalManager extends HttpServlet {
 		}
 
 		if(action.equals("newEval")){
-			int q = Integer.parseInt(request.getParameter("quality"));
-			int s = Integer.parseInt(request.getParameter("subject"));
-			int d = Integer.parseInt(request.getParameter("desire"));
-			int ra = Integer.parseInt(request.getParameter("read_author"));
-			int r = Integer.parseInt(request.getParameter("recommend"));
-			double note= (double) (q+s+d+ra+r)/5;
+			Integer q = request.getParameter("quality")==null?null:Integer.parseInt(request.getParameter("quality"));
+			Integer s = request.getParameter("subject")==null?null:Integer.parseInt(request.getParameter("subject"));
+			Integer d = request.getParameter("desire")==null?null:Integer.parseInt(request.getParameter("desire"));
+			Integer ra = request.getParameter("read_author")==null?null:Integer.parseInt(request.getParameter("read_author"));
+			Integer r = request.getParameter("recommend")==null?null:Integer.parseInt(request.getParameter("recommend"));
+			
+			Double note;
+			if(q==null || s==null || d==null || ra==null || r==null) note = null;
+			else note= (double) (q+s+d+ra+r)/5;
 			
 			Evaluation eval=new Evaluation();
 			eval.setBook(request.getParameter("book"));
