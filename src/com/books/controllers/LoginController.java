@@ -19,6 +19,7 @@ import com.books.utilities.MailUtil;
 
 /**
  * Servlet implementation class LoginController
+ * gestion de la connexion au site
  */
 @WebServlet({ "/LoginController", "/index" })
 public class LoginController extends HttpServlet {
@@ -37,7 +38,9 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action = request.getParameter("action");
-		
+		/**
+		 * déconnexion
+		 */
 		if(action.equals("logout")){
 			System.out.println("déconnexion ...");
 			request.getSession().setAttribute("user", null);
@@ -45,6 +48,9 @@ public class LoginController extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		else{
+			/**
+			 * login
+			 */
 			if(action.equals("login")){			
 				if(request.getSession().getAttribute("user")!=null){
 					User usr = (User) request.getSession().getAttribute("user");
@@ -95,6 +101,9 @@ public class LoginController extends HttpServlet {
 				}
 			}
 			else{
+				/**
+				 * demande de création d'un compte
+				 */
 				if(action.equals("createaccount")){
 					
 					//MailUtil.sendMessage("Demande de création de compte", "Demande de création de compte", "tkieffer67@gmail.com", request.getParameter("email"));
@@ -121,6 +130,9 @@ public class LoginController extends HttpServlet {
 					
 				}
 				else{
+					/**
+					 * erreur de connexion
+					 */
 					request.setAttribute("result", "fail");
 					request.getRequestDispatcher("index.jsp").forward(request, response);
 				}

@@ -32,7 +32,7 @@ import com.books.utilities.HibernateUtil;
 
 /**
  * Servlet implementation class BooksController
- * menu qui gère les fonctionnalités liées aux livres pour un utilisateur lambda
+ * recherche et ajout de livre en vue d'une évaluation
  * @author Morgane et Thomas
  * 
  */
@@ -116,7 +116,9 @@ public class BooksController extends HttpServlet {
 			
 			request.getRequestDispatcher("BooksController?action=search").forward(request, response);
 		}
-		
+		/**
+		 * recherche d'un livre
+		 */
 		if(action.equals("search")){
 			
 			Session sess = HibernateUtil.getSessionFactory().openSession();

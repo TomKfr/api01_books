@@ -9,12 +9,18 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
+/**
+ * classe pour la gestion de l'envoi de mail
+ * @author Morgane et Thomas
+ *
+ */
 public class MailUtil {
 	
 		public static void sendMessage(String subject, String text, String destinataire, String copyDest) { 
 
-		// 1 -> Création de la session 
+		/**
+		 * création de la session
+		 */
 	    Properties properties = new Properties(); 
 	    properties.setProperty("mail.transport.protocol", "smtp");
 	    properties.setProperty("mail.smtp.starttls.enable", "true");
@@ -23,7 +29,9 @@ public class MailUtil {
 	    properties.setProperty("mail.smtp.user", "tkieffer67@gmail.com"); 
 	    Session session = Session.getInstance(properties); 
 	 
-	 // 2 -> Création du message 
+	 /**
+	  * création du message
+	  */
 	    MimeMessage message = new MimeMessage(session); 
 	    try { 
 	        message.setText(text); 
@@ -34,7 +42,9 @@ public class MailUtil {
 	        e.printStackTrace(); 
 	    } 
 	    
-	 // 3 -> Envoi du message 
+	 /**
+	  * envoi du message
+	  */
 	    
 	    Transport transport = null;
 	    try { 

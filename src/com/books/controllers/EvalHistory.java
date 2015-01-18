@@ -22,7 +22,7 @@ import com.books.utilities.HibernateUtil;
 
 /**
  * Servlet implementation class EvalHistory
- * menu qui gère l'historique des évaluations
+ * historique et reprise d'une évaluation
  */
 @WebServlet("/EvalHistory")
 public class EvalHistory extends HttpServlet {
@@ -42,7 +42,9 @@ public class EvalHistory extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		User usr = (User) request.getSession().getAttribute("user");
-		
+		/**
+		 * affichage de l'historique des évaluations terminées et en cours
+		 */
 		if(request.getParameter("action").equals("seeHistory")) {
 			Integer nbpages = (Integer) request.getAttribute("nbpages"); 
 			Integer  pagination = Integer.parseInt(request.getParameter("page"));
@@ -95,7 +97,9 @@ public class EvalHistory extends HttpServlet {
 			
 			sess.close();
 		}
-		
+		/**
+		 * reprise d'une évaluation enregistrée
+		 */
 		if(request.getParameter("action").equals("submitEval")) {
 			User u = (User) request.getSession().getAttribute("user");
 			Session sess = HibernateUtil.getSessionFactory().openSession();
@@ -108,6 +112,9 @@ public class EvalHistory extends HttpServlet {
 			
 			request.getRequestDispatcher("user/reader_save_eval.jsp").forward(request,  response);
 		}
+		/**
+		 * enregistrement définitif d'une évaluation après reprise
+		 */
 		if(request.getParameter("action").equals("send")) {
 		
 			Session sess = HibernateUtil.getSessionFactory().openSession();

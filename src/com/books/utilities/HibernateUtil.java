@@ -4,7 +4,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-
+/**
+ * classe pour la gestion des sessions Hibernate
+ * @author Morgane et Thomas
+ *
+ */
 public class HibernateUtil {
 	
 	private static SessionFactory sessionFactory;

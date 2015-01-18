@@ -7,21 +7,31 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.books.model.Evaluation;
-
+/**
+ * classe qui implémente l'interface MatchingAlgo et qui permet de faire des matches en étudiant les scores attribués aux livres
+ * @author Morgane et Thomas
+ *
+ */
 public class MatchByScore implements MatchingAlgo {
 	
-	private String user;
-	private String book;
-	private String closestuser;
-	private String farthestuser;
-	
+	private String user; /** utilisateur qui a demandé le match */
+	private String book; /** livre concerné par le match */
+	private String closestuser; /** utilisateur dont le score est le plus proche */
+	private String farthestuser; /** utilisateur dont le score ets le plus éloigné */
+	/**
+	 * constructeur sans argument 
+	 */
 	public MatchByScore() {
 		this.user=null;
 		this.book=null;
 		this.closestuser=null;
 		this.farthestuser=null;
 	}
-	
+	/**
+	 * l'algorithme qui étudie le score attribué par un utilisateur à un livre et recherche les utilisateurs qui ont mis le score le + proche et le + éloigné pour ce même livre (en valeur absolue)
+	 * @param user
+	 * @param eval
+	 */
 	private void calculate(String user, Evaluation eval){
 		
 		this.user = user;

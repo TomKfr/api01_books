@@ -7,20 +7,31 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.books.model.Evaluation;
-
+/**
+ * classe qui implémente l'interface MatchingAlgo et qui permet de faire des matches de manière aléatoire
+ * @author Morgane et Thomas
+ *
+ */
 public class MatchRandom implements MatchingAlgo {
-	private String user;
-	private String book;
-	private String closestuser;
-	private String farthestuser;
+	private String user; /** l'utilisateur qui a demandé le match */
+	private String book; /** le livre concerné par le match */
+	private String closestuser; /** l'utilisateur le plus proche selon l'algo */
+	private String farthestuser; /** l'utilisateur le plus éloigné selon l'algo */
 	
+	/**
+	 * constructeur sans argument 
+	 */
 	public MatchRandom() {
 		this.user=null;
 		this.book=null;
 		this.closestuser=null;
 		this.farthestuser=null;
 	}
-	
+	/**
+	 * l'algorithme qui associe les utilisateurs de manière aléatoire
+	 * @param user
+	 * @param eval
+	 */
 	private void calculate(String user, Evaluation eval){
 		
 		this.user = user;
@@ -47,6 +58,7 @@ public class MatchRandom implements MatchingAlgo {
 	}
 
 	@Override
+	
 	public String getClosestUser(String user, Evaluation eval) {
 		
 		System.out.println("getting closest user randomly ...");
@@ -59,6 +71,7 @@ public class MatchRandom implements MatchingAlgo {
 	}
 
 	@Override
+	
 	public String getFarthestUser(String user, Evaluation eval) {
 		
 		if(this.user!=user || this.book!=eval.getBook()){

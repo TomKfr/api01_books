@@ -23,6 +23,7 @@ import com.books.utilities.MatchingAlgo;
 
 /**
  * Servlet implementation class MatchManager
+ * gestion des matches par l'administrateur
  */
 @WebServlet("/MatchManager")
 public class MatchManager extends HttpServlet {
@@ -43,7 +44,9 @@ public class MatchManager extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action = request.getParameter("action");
-
+		/**
+		 * page d'accueil du menu avec l'ensemble des matches
+		 */
 		if(action.equals("index")){
 			
 			Session sess = HibernateUtil.getSessionFactory().openSession();
@@ -54,7 +57,9 @@ public class MatchManager extends HttpServlet {
 			
 			request.getRequestDispatcher("./admin/admin_match_mgmt.jsp").forward(request, response);
 		}
-		
+		/**
+		 * mise à jour des matches pour un utilisateur et un livre particulier
+		 */
 		if(action.equals("update")){
 			
 			String user = request.getParameter("user");
@@ -104,14 +109,18 @@ public class MatchManager extends HttpServlet {
 			request.setAttribute("result", "Okay, c'est bon !");
 			request.getRequestDispatcher("EvalManager?action=index").forward(request, response);
 		}
-		
+		/**
+		 * changement de l'algorithme de matches
+		 */
 		if(action.equals("matchalgo")){
 			this.updateMatchingAlgo(request.getParameter("matchalgo"));
 			System.out.println("changement d'algo de macth : "+request.getParameter("matchalgo"));
 			request.getSession().setAttribute("matchalgo", request.getParameter("matchalgo"));
 			request.getRequestDispatcher("MatchManager?action=index").forward(request, response);
 		}
-		
+		/**
+		 * suppression d'un match
+		 */
 		if(action.equals("delete")){
 			String num = request.getParameter("num");
 			
@@ -124,7 +133,9 @@ public class MatchManager extends HttpServlet {
 			
 			request.getRequestDispatcher("MatchManager?action=index").forward(request, response);
 		}
-		
+		/**
+		 * MAJ de tous les matches
+		 */
 		if(action.equals("updateall")){
 			this.update_all_matches();
 			request.getRequestDispatcher("MatchManager?action=index").forward(request, response);
@@ -135,14 +146,19 @@ public class MatchManager extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
+	/**
+	 * méthode pour le choix de l'algorithme à implémenter pour les matches
+	 * @param a
+	 */
 	private void updateMatchingAlgo(String a){
 		switch(a){
 		case "byscore" : { this.mtch = new MatchByScore(); System.out.println("matchalgo = byscore");break;}
 		case "random" : {this.mtch = new MatchRandom(); System.out.println("matchalgo = random");break;}
 		}
 	}
-	
+	/**
+	 * méthode pour lancer la mise à jour de tous les matches
+	 */
 	private void update_all_matches(){
 		System.out.println("mise à jour de toutes les match !!!");
 		

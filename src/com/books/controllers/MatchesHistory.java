@@ -23,6 +23,7 @@ import com.books.utilities.MailUtil;
 import com.books.model.Tmatch;
 /**
  * Servlet implementation class MatchesHistory
+ * historique des matches pour l'utilisateur
  */
 @WebServlet("/MatchesHistory")
 public class MatchesHistory extends HttpServlet {
@@ -41,6 +42,9 @@ public class MatchesHistory extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		/**
+		 * vue de l'historique des matches
+		 */
 		if(request.getParameter("action").equals("seeMatches")) {
 			Integer nbpages = (Integer) request.getAttribute("nbpages"); 
 			Integer  pagination = Integer.parseInt(request.getParameter("page"));
@@ -90,6 +94,9 @@ public class MatchesHistory extends HttpServlet {
 			sess.close();
 		}
 		else { 
+			/**
+			 * demande de MAJ des matches
+			 */
 			if(request.getParameter("action").equals("update")) {
 				User u = (User) request.getSession().getAttribute("user");
 				String message = "Bonjour, l'utilisateur " + u.getName() +" souhaiterait une mise à jour des matches. ";

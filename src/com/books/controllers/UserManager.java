@@ -23,6 +23,7 @@ import com.books.utilities.MailUtil;
 
 /**
  * Servlet implementation class UserManager
+ * gestion des utilisateurs par l'administrateur
  */
 @WebServlet("/UserManager")
 public class UserManager extends HttpServlet {
@@ -41,7 +42,9 @@ public class UserManager extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action = request.getParameter("action");
-		
+		/**
+		 * ajout d'un utilisateur
+		 */
 		if(action.equals("add")){
 			
 			Session sess = HibernateUtil.getSessionFactory().openSession();
@@ -68,7 +71,9 @@ public class UserManager extends HttpServlet {
 			//MailUtil.sendMessage("Notification de création de compte", message, u.getEmail(), "tkieffer67@gmail.com");
 			System.out.println("envoi de mail : création/update user");
 		}
-		
+		/**
+		 * suppression d'un compte
+		 */
 		if(action.equals("delete")){
 			
 			String email = request.getParameter("email");
@@ -93,7 +98,9 @@ public class UserManager extends HttpServlet {
 				request.getRequestDispatcher("./admin/user_mgmt.jsp").forward(request, response);
 			}
 		}
-
+		/**
+		 * modification d'un compte
+		 */
 		if(action.equals("startmodif")){
 			
 			Session sess = HibernateUtil.getSessionFactory().openSession();
@@ -106,7 +113,9 @@ public class UserManager extends HttpServlet {
 			
 			request.getRequestDispatcher("./admin/user_mgmt.jsp").forward(request, response);
 		}
-		
+		/**
+		 * rechercher un compte
+		 */
 		if(action.equals("search")){
 			System.out.println("searching ...");
 			
@@ -168,7 +177,9 @@ public class UserManager extends HttpServlet {
 			
 			request.getRequestDispatcher("./admin/user_mgmt.jsp").forward(request, response);
 		}
-		
+		/**
+		 * visualiser un compte
+		 */
 		if(action.equals("view")){
 			
 			Session sess = HibernateUtil.getSessionFactory().openSession();
@@ -186,7 +197,9 @@ public class UserManager extends HttpServlet {
 			
 			request.getRequestDispatcher("./admin/admin_view_user.jsp").forward(request, response);			
 		}
-		
+		/**
+		 * accueil du menu
+		 */
 		if(action.equals("index")){
 			request.getRequestDispatcher("./admin/user_mgmt.jsp").forward(request, response);
 		}

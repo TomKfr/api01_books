@@ -24,7 +24,7 @@ import com.books.utilities.HibernateUtil;
 
 /**
  * Servlet implementation class BookMgmt
- * servlet qui gère la partie Book Management de l'application 
+ * gestion des livres par l'administrateur 
  * @author Morgane et Thomas
  */
 @WebServlet("/BookMgmt")

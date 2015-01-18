@@ -20,6 +20,7 @@ import com.books.utilities.HibernateUtil;
 
 /**
  * Servlet implementation class EvalManager
+ * gestion des évaluations 
  */
 @WebServlet("/EvalManager")
 public class EvalManager extends HttpServlet {
@@ -42,7 +43,9 @@ public class EvalManager extends HttpServlet {
 		Session sess = HibernateUtil.getSessionFactory().openSession();
 		
 		String action = request.getParameter("action");
-		
+		/**
+		 * suppression d'une évaluation
+		 */
 		if(action.equals("delete")){
 			
 			String num = request.getParameter("num");
@@ -55,6 +58,9 @@ public class EvalManager extends HttpServlet {
 			sess.close();
 			request.getRequestDispatcher("EvalManager?action=index").forward(request, response);
 		}
+		/**
+		 * page d'accueil du menu pour l'administrateur
+		 */
 		if(action.equals("index")){ 
 			
 			List<Evaluation> list = new ArrayList<Evaluation>();
@@ -67,7 +73,9 @@ public class EvalManager extends HttpServlet {
 			request.setAttribute("evals", list);
 			request.getRequestDispatcher("./admin/admin_eval_mgmt.jsp").forward(request, response);
 		}
-
+		/**
+		 * enregistrement d'une évaluation
+		 */
 		if(action.equals("newEval")){
 			Integer q = request.getParameter("quality")==null?null:Integer.parseInt(request.getParameter("quality"));
 			Integer s = request.getParameter("subject")==null?null:Integer.parseInt(request.getParameter("subject"));
@@ -102,7 +110,9 @@ public class EvalManager extends HttpServlet {
 			
 			request.getRequestDispatcher("EvalManager?action=search&isbn=").forward(request, response);
 		}
-		
+		/**
+		 * recherche d'un livre à évaluer
+		 */
 		if(action.equals("search")){
 			List<Books> list = new ArrayList<Books>();
 			
@@ -122,7 +132,9 @@ public class EvalManager extends HttpServlet {
 			System.out.println("forwarding ...");
 			request.getRequestDispatcher("/user/reader_add_book.jsp").forward(request, response);
 		}
-		
+		/**
+		 * envoi vers la page de saisie d'une évaluation
+		 */
 		if(action.equals("initeval")){
 			
 			String isbn = request.getParameter("isbn");
@@ -138,7 +150,9 @@ public class EvalManager extends HttpServlet {
 			System.out.println("forwarding ...");
 			request.getRequestDispatcher("/user/reader_add_eval.jsp").forward(request, response);
 		}
-		
+		/**
+		 * affichage des évaluations en fonction de l'utilisateur pour l'administrateur
+		 */
 		if(action.equals("filter")){ 
 			
 			List<Evaluation> list = new ArrayList<Evaluation>();

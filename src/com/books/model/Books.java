@@ -18,7 +18,7 @@ public class Books implements java.io.Serializable {
 	private String auteur; /**auteur */
 	private String genre; /**genre  */
 
-	/**constructeur sans argument de la classe */
+	/**constructeur sans argument  */
 	public Books() {
 	}
 
