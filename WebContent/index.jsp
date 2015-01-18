@@ -15,6 +15,10 @@
   		if(res == null) {
   			result = "style='display:none'";
   		}
+  		String result2 = "";
+  		if(request.getAttribute("accountcr")==null){
+  			result2 = "style='display:none'";
+  		}
   	%>
   	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
@@ -46,7 +50,13 @@
 				<div class="col-lg-offset-1 col-lg-8 alert alert-danger" <%= result %>>
 					Echec de connexion !
 				</div>
+				<div class="col-lg-offset-1 col-lg-8 alert alert-success" <%= result2 %>>
+					Compte créé !
+				</div>
 			</form>
+			<div class="col-lg-offset-4 col-lg-4">
+				Pas de compte ?  <span class="glyphicon glyphicon-arrow-right">  </span><a href="signin.jsp" class="btn btn-info">Demander un compte</a>
+			</div>
 		</div>
     </div>
     <script src="bootstrap/js/jquery-2.1.1.min.js"></script>

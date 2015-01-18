@@ -1,6 +1,7 @@
 package com.books.controllers;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,11 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import com.books.model.User;
 import com.books.utilities.HibernateUtil;
+import com.books.utilities.MailUtil;
 
 /**
  * Servlet implementation class LoginController
@@ -92,8 +95,35 @@ public class LoginController extends HttpServlet {
 				}
 			}
 			else{
-				request.setAttribute("result", "fail");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				if(action.equals("createaccount")){
+					
+					//MailUtil.sendMessage("Demande de création de compte", "Demande de création de compte", "tkieffer67@gmail.com", request.getParameter("email"));
+					System.out.println("envoi de mail : création de compte");
+					
+					User u = new User();
+					u.setEmail(request.getParameter("email"));
+					u.setName(request.getParameter("nom"));
+					u.setPwd(request.getParameter("pwd"));
+					u.setAddress(request.getParameter("adrs"));
+					u.setTel(request.getParameter("tel"));
+					u.setAccountStatus(true);
+					u.setIsAdmin(false);
+					u.setCreationDate(new Date());
+					
+					Session sess = HibernateUtil.getSessionFactory().openSession();
+					sess.beginTransaction();
+					sess.save(u);
+					sess.getTransaction().commit();
+					sess.close();
+					
+					request.setAttribute("accountcr", "ok");
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+					
+				}
+				else{
+					request.setAttribute("result", "fail");
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+				}
 			}
 		}
 	}
