@@ -44,7 +44,7 @@
 	</div>
 	<div class="col-lg-offset-2 col-lg-8">
 		<table class="table">
-			<tr><th>ISBN</th><th>Titre</th><th>Auteur</th><th>Genre</th><th>Action</th></tr>
+			<tr><th align=center>ISBN</th><th align=center>Titre</th><th align=center>Auteur</th><th align=center>Genre</th><th align=center>Action</th></tr>
 			<%
 				if(books!=null){
 				while(it.hasNext()){

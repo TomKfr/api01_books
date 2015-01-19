@@ -91,7 +91,7 @@
 				<%
 					if(!books.isEmpty()){
 						out.println("<div class='col-lg-12'><br></div><h4>Résultats</h4>");
-						out.println("<table class='table'><tr><th>ISBN</th><th>Titre</th><th>Auteur</th><th>Genre</th><th>Action</th></tr>");
+						out.println("<table class='table'><tr><th align=center>ISBN</th><th align=center>Titre</th><th align=center>Auteur</th><th align=center>Genre</th><th align=center>Action</th></tr>");
 						while(it.hasNext()){
 							Books bk = (Books) it.next();
 							out.println("<tr><td align=center>"+bk.getIsbn()+"</td><td align=center>"+bk.getTitre()+"</td><td align=center>"+bk.getAuteur()+"</td><td align=center>"+bk.getGenre()+"</td>");

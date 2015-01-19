@@ -58,7 +58,7 @@
 		</div>
 		<div class="col-lg-12">
 			<table class="table">
-				<tr><th>Utilisateur</th><th>Livre</th><th>Utilisateur le plus proche</th><th>Utilisateur le plus éloigné</th><th>Action</th></tr>
+				<tr><th align=center>Utilisateur</th><th align=center>Livre</th><th align=center>Utilisateur le plus proche</th><th align=center>Utilisateur le plus éloigné</th><th align=center>Action</th></tr>
 				<%
 					if(list!=null){
 						Iterator<Tmatch> it = list.iterator();

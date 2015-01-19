@@ -43,7 +43,7 @@
 		<div class="col-lg-12">
 			<div class="col-lg-12">
 				<table class="table">
-					<tr><th>Email</th><th>Nom</th><th>Mot de passe</th><th>Adresse</th><th>Téléphone</th><th>Date de création</th><th>Statut du compte</th><th>Administrateur</th></tr>
+					<tr><th align=center>Email</th><th align=center>Nom</th><th align=center>Mot de passe</th><th align=center>Adresse</th><th>Téléphone</th><th align=center>Date de création</th><th align=center>Statut du compte</th><th align=center>Administrateur</th></tr>
 					<tr><td align=center><%=vieweduser.getEmail() %></td><td align=center><%=vieweduser.getName() %></td><td align=center><%=vieweduser.getPwd() %></td><td align=center><%=vieweduser.getAddress() %></td><td align=center><%=vieweduser.getTel() %></td><td align=center><%=vieweduser.getCreationDate() %></td><td align=center><%=vieweduser.getAccountStatus() %></td><td align=center><%=vieweduser.getIsAdmin() %></td></tr>
 				</table>
 			</div>
@@ -74,7 +74,7 @@
 				<%
 					if(listmatch!=null){
 						Iterator<Tmatch> it = listmatch.iterator();
-						out.println("<tr><th>Utilisateur</th><th>Utilisateur le plus proche</th><th>Utilisateur le plus éloigné</th><th>Livre</th></tr>");
+						out.println("<tr><th align=center>Utilisateur</th><th align=center>Utilisateur le plus proche</th><th align=center>Utilisateur le plus éloigné</th><th align=center>Livre</th></tr>");
 						while(it.hasNext()){
 							Tmatch e = it.next();
 							%>
