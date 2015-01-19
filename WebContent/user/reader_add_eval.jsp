@@ -3,7 +3,7 @@
 <%@page import="com.books.model.User"%>
 <html lang="fr">
   <head>
-    <title>Monsite - Accueil lecteur</title>
+    <title>MatchBooks - Accueil lecteur</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,12 +19,12 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="logout.jsp">Mon beau site</a>
+				<a class="navbar-brand" href="logout.jsp">MatchBooks</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="${pageContext.request.contextPath}/BooksController?action=index">Find a book</a></li>
-				<li><a href="${pageContext.request.contextPath}/EvalHistory?action=seeHistory&page=1">My books</a></li>
-				<li><a href="${pageContext.request.contextPath}/MatchesHistory?action=seeMatches&page=0">My matches</a></li>
+				<li class="active"><a href="${pageContext.request.contextPath}/BooksController?action=index">Trouver un livre</a></li>
+				<li><a href="${pageContext.request.contextPath}/EvalHistory?action=seeHistory&page=1">Mes évaluations</a></li>
+				<li><a href="${pageContext.request.contextPath}/MatchesHistory?action=seeMatches&page=0">Mes matches</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="logout.jsp">Déconnexion</a></li>

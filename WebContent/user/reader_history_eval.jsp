@@ -7,7 +7,7 @@
 <%@page import="java.util.List"%>
 <html lang="fr">
   <head>
-    <title>Monsite - Accueil lecteur</title>
+    <title>MatchBooks - Accueil lecteur</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,12 +29,12 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="logout.jsp">Mon beau site</a>
+				<a class="navbar-brand" href="logout.jsp">MatchBooks</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="${pageContext.request.contextPath}/BooksController?action=index">Find a book</a></li>
-				<li class="active"><a href="${pageContext.request.contextPath}/EvalHistory?action=seeHistory&page=1">My books</a></li>
-				<li><a href="${pageContext.request.contextPath}/MatchesHistory?action=seeMatches&page=0">My matches</a></li>
+				<li><a href="${pageContext.request.contextPath}/BooksController?action=index">Trouver un livre</a></li>
+				<li class="active"><a href="${pageContext.request.contextPath}/EvalHistory?action=seeHistory&page=1">Mes évaluations</a></li>
+				<li><a href="${pageContext.request.contextPath}/MatchesHistory?action=seeMatches&page=0">Mes matches</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="logout.jsp">Déconnexion</a></li>
@@ -52,7 +52,7 @@
 				if(eval!=null){
 				while(it.hasNext()){
 					Evaluation e = (Evaluation) it.next();
-					out.println("<tr><td>"+e.getNum()+"</td><td>"+titres.get(e.getBook())+"</td><td>"+e.getQuality()+"</td><td>"+e.getSubject()+"</td><td>"+e.getDesire()+"</td><td>"+e.getReadAuthor()+"</td><td>"+e.getRecommend()+"</td><td>"+e.getScore()+"</td>");
+					out.println("<tr><td align=center>"+e.getNum()+"</td><td align=center>"+titres.get(e.getBook())+"</td><td align=center>"+e.getQuality()+"</td><td align=center>"+e.getSubject()+"</td><td align=center>"+e.getDesire()+"</td><td align=center>"+e.getReadAuthor()+"</td><td align=center>"+e.getRecommend()+"</td><td align=center>"+e.getScore()+"</td>");
 				}}
 				else{
 					out.println("<tr><td>Aucun livre évalué.</td></tr>");
@@ -93,7 +93,7 @@
 				if(noteval!=null){
 				while(it2.hasNext()){
 					Evaluation e2 = (Evaluation) it2.next();
-					out.println("<tr><td>"+e2.getNum()+"</td><td>"+titres.get(e2.getBook())+"</td>");
+					out.println("<tr><td align=center>"+e2.getNum()+"</td><td align=center>"+titres.get(e2.getBook())+"</td>");
 					out.println("<td align='center'><a class='btn btn-info' href='EvalHistory?action=submitEval&numeval="+e2.getNum()+"'>Poursuivre l'évaluation</a>");
 				}}
 				else{

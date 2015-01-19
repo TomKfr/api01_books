@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <title>Monsite</title>
+    <title>MatchBooks</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +23,7 @@
   	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="LoginController?action=login">Mon beau site</a>
+				<a class="navbar-brand" href="LoginController?action=login">MatchBooks</a>
 			</div>
 		</div>
 	</div>
@@ -40,7 +40,7 @@
 					<input type="text" class="form-control" id="login" placeholder="login" name="login">
 				</div>
 				<div class="form-group">
-					<label for="pwd">Password</label>
+					<label for="pwd">Mot de passe</label>
 					<input type="password" class="form-control" id="pwd" placeholder="password" name="pwd">
 				</div>
 				<div class="col-lg-3">

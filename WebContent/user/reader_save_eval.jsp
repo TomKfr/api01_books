@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <title>Monsite</title>
+    <title>MatchBooks</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,12 +31,12 @@
   	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="logout.jsp">Mon beau site</a>
+				<a class="navbar-brand" href="logout.jsp">MatchBooks</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="${pageContext.request.contextPath}/BooksController?action=index">Find a book</a></li>
-				<li><a href="${pageContext.request.contextPath}/EvalHistory?action=seeHistory&page=1">My books</a></li>
-				<li><a href="${pageContext.request.contextPath}/MatchesHistory?action=seeMatches&page=0">My matches</a></li>
+				<li><a href="${pageContext.request.contextPath}/BooksController?action=index">Trouver un livre</a></li>
+				<li class=active><a href="${pageContext.request.contextPath}/EvalHistory?action=seeHistory&page=1">Mes évaluations</a></li>
+				<li><a href="${pageContext.request.contextPath}/MatchesHistory?action=seeMatches&page=0">Mes matches</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="logout.jsp">Déconnexion</a></li>
@@ -45,13 +45,13 @@
 	</div>
 	<div class="container">
 	<header class="page-header">
-		<h1>Evaluation</h1>
+		<h1>Evaluations</h1>
 	</header>
 	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<h2>Enregistrer une évaluation</h2>
+				<h2>Continuer une évaluation</h2>
 				<form method="get" action="EvalHistory?action=send" class="col-lg-offset-3 col-lg-6">
 				<div class="form-group">
 						<label for="num">Numéro</label>

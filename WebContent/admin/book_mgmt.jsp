@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <title>Monsite - Accueil admin</title>
+    <title>MatchBooks - Accueil administrateur</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,13 +23,13 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="LoginController?action=login">Mon beau site</a>
+				<a class="navbar-brand" href="LoginController?action=login">MatchBooks</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="UserManager?action=index">User Management</a></li>
-				<li class="active"><a href="BookMgmt?action=index">Book Management</a></li>
-				<li><a href="EvalManager?action=index">Evaluation Management</a></li>
-				<li><a href="MatchManager?action=index">Match Management</a></li>
+				<li><a href="UserManager?action=index">Gestion des utilisateurs</a></li>
+				<li class="active"><a href="BookMgmt?action=index">Gestion des livres</a></li>
+				<li><a href="EvalManager?action=index">Gestion des évaluations</a></li>
+				<li><a href="MatchManager?action=index">Gestion des matches</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="logout.jsp">Déconnexion</a></li>
@@ -105,7 +105,7 @@
 							Books bk = (Books) it.next();
 							out.println("<tr><td>"+bk.getIsbn()+"</td><td>"+bk.getTitre()+"</td><td>"+bk.getAuteur()+"</td><td>"+bk.getGenre()+"</td>");
 							out.println("<td align='center'><a class='btn btn-info' href='BookMgmt?action=modify&book="+bk.getIsbn()+"'>Modifier</a><a class='btn btn-danger' href='BookMgmt?action=delete&book="+bk.getIsbn()+"'>Supprimer</a>");
-							out.println("<a class='btn btn-success' href='EvalManager?action=index&isbn="+bk.getIsbn()+"'>Voir Evals</a></td></tr>");
+							out.println("<a class='btn btn-success' href='EvalManager?action=index&isbn="+bk.getIsbn()+"'>Voir Evaluations</a></td></tr>");
 						}
 						out.println("</table>");
 					}

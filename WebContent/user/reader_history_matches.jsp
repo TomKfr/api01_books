@@ -8,7 +8,7 @@
 <%@page import="java.util.List"%>
 <html lang="fr">
   <head>
-    <title>Monsite - Accueil lecteur</title>
+    <title>MatchBooks - Accueil lecteur</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,12 +27,12 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="logout.jsp">Mon beau site</a>
+				<a class="navbar-brand" href="logout.jsp">MatchBooks</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="${pageContext.request.contextPath}/BooksController?action=index">Find a book</a></li>
-				<li><a href="${pageContext.request.contextPath}/EvalHistory?action=seeHistory&page=1">My books</a></li>
-				<li class="active"><a href="${pageContext.request.contextPath}/MatchesHistory?action=seeMatches&page=0">My matches</a></li>
+				<li><a href="${pageContext.request.contextPath}/BooksController?action=index">Trouver un livre</a></li>
+				<li><a href="${pageContext.request.contextPath}/EvalHistory?action=seeHistory&page=1">Mes évaluations</a></li>
+				<li class="active"><a href="${pageContext.request.contextPath}/MatchesHistory?action=seeMatches&page=0">Mes matches</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="logout.jsp">Déconnexion</a></li>
@@ -44,15 +44,15 @@
 		<h1>Historique de vos matches </h1>
 	</header>
 	</div>
-	<div> <% out.println("<a href='MatchesHistory?action=update"+"' class='btn btn-primary'> Update Matches</a> "); %>
+	<div> <% out.println("<a href='MatchesHistory?action=update"+"' class='btn btn-primary'> Demander une MAJ</a> "); %>
 	<div class="col-lg-offset-2 col-lg-8">
 		<table class="table">
-			<tr><th>Numéro</th><th>User le + proche </th><th>User le + loin</th><th>Livre</th></tr>
+			<tr><th>Numéro</th><th>Plus proche </th><th>Plus éloigné</th><th>Livre</th></tr>
 			<%
 				if(match!=null){
 				while(it.hasNext()){
 					Tmatch m = (Tmatch) it.next();
-					out.println("<tr><td>"+m.getNum()+"</td><td>"+m.getClosestuser()+"</td><td>"+m.getFarthestuser()+"</td><td>"+titres.get(m.getBook())+"</td>");
+					out.println("<tr><td align=center>"+m.getNum()+"</td><td align=center>"+m.getClosestuser()+"</td><td align=center>"+m.getFarthestuser()+"</td><td align=center>"+titres.get(m.getBook())+"</td>");
 				}}
 				else{
 					out.println("<tr><td>Aucun match.</td></tr>");

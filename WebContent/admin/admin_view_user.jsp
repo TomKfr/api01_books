@@ -6,7 +6,7 @@
 <%@page import="com.books.model.User"%>
 <html lang="fr">
   <head>
-    <title>Monsite - Accueil admin</title>
+    <title>MatchBooks</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,13 +23,13 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="LoginController?action=login">Mon beau site</a>
+				<a class="navbar-brand" href="LoginController?action=login">MatchBooks</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="UserManager?action=index">User Management</a></li>
-				<li><a href="BookMgmt?action=index">Book Management</a></li>
-				<li><a href="EvalManager?action=index">Evaluation Management</a></li>
-				<li><a href="MatchManager?action=index">Match Management</a></li>
+				<li class="active"><a href="UserManager?action=index">Gestion des utilisateurs</a></li>
+				<li><a href="BookMgmt?action=index">Gestion des livres</a></li>
+				<li><a href="EvalManager?action=index">Gestion des évaluations</a></li>
+				<li><a href="MatchManager?action=index">Gestion des matches</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="LoginController?action=logout">Déconnexion</a></li>
@@ -38,13 +38,13 @@
 	</div>
 	<div class="container">
 		<header class="page-header">
-			<h1> Informations de  : <%=vieweduser.getName() %> </h1>
+			<h1> Informations de <%=vieweduser.getName() %> </h1>
 		</header>
 		<div class="col-lg-12">
 			<div class="col-lg-12">
 				<table class="table">
 					<tr><th>Email</th><th>Nom</th><th>Mot de passe</th><th>Adresse</th><th>Téléphone</th><th>Date de création</th><th>Statut du compte</th><th>Administrateur</th></tr>
-					<tr><td><%=vieweduser.getEmail() %></td><td><%=vieweduser.getName() %></td><td><%=vieweduser.getPwd() %></td><td><%=vieweduser.getAddress() %></td><td><%=vieweduser.getTel() %></td><td><%=vieweduser.getCreationDate() %></td><td><%=vieweduser.getAccountStatus() %></td><td><%=vieweduser.getIsAdmin() %></td></tr>
+					<tr><td align=center><%=vieweduser.getEmail() %></td><td align=center><%=vieweduser.getName() %></td><td align=center><%=vieweduser.getPwd() %></td><td align=center><%=vieweduser.getAddress() %></td><td align=center><%=vieweduser.getTel() %></td><td align=center><%=vieweduser.getCreationDate() %></td><td align=center><%=vieweduser.getAccountStatus() %></td><td align=center><%=vieweduser.getIsAdmin() %></td></tr>
 				</table>
 			</div>
 			<div class="col-lg-12">
@@ -57,19 +57,19 @@
 						while(it.hasNext()){
 							Evaluation e = it.next();
 							%>
-							<tr><td><%=e.getUser() %></td><td><%=e.getBook() %></td><td><%=e.getQuality() %></td><td><%=e.getSubject() %></td><td><%=e.getDesire() %></td><td><%=e.getReadAuthor() %></td><td><%=e.getRecommend() %></td><td><%=e.getScore() %></td></tr>
+							<tr><td align=center><%=e.getUser() %></td><td align=center><%=e.getBook() %></td><td align=center><%=e.getQuality() %></td><td align=center><%=e.getSubject() %></td><td align=center><%=e.getDesire() %></td><td align=center><%=e.getReadAuthor() %></td><td align=center><%=e.getRecommend() %></td><td align=center><%=e.getScore() %></td></tr>
 							<%
 						}
 					}
 					else{
-						out.println("<tr><td>Pas d'evals</td></tr>");
+						out.println("<tr><td>Pas d'evaluation.</td></tr>");
 					}
 				%>
 				</table>
 			</div>
 			
 			<div class="col-lg-12">
-				<h2>Match</h2>
+				<h2>Matches</h2>
 				<table class="table">
 				<%
 					if(listmatch!=null){
@@ -78,12 +78,12 @@
 						while(it.hasNext()){
 							Tmatch e = it.next();
 							%>
-							<tr><td><%=e.getUser() %></td><td><%=e.getClosestuser() %></td><td><%=e.getFarthestuser() %></td><td><%=e.getBook() %></td></tr>
+							<tr><td align=center><%=e.getUser() %></td><td align=center><%=e.getClosestuser() %></td><td align=center><%=e.getFarthestuser() %></td><td align=center><%=e.getBook() %></td></tr>
 							<%
 						}
 					}
 					else{
-						out.println("<tr><td>Pas de match pour cet utilisateur</td></tr>");
+						out.println("<tr><td>Pas de match.</td></tr>");
 					}
 				%>
 				</table>
