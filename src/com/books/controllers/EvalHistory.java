@@ -145,7 +145,7 @@ public class EvalHistory extends HttpServlet {
 			
 			sess.close();
 			
-			request.getRequestDispatcher("EvalHistory?action=seeHistory&page=0").forward(request, response);
+			request.getRequestDispatcher("EvalHistory?action=seeHistory&page=1").forward(request, response);
 		}
 	}
 

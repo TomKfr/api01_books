@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-table.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/index.css" rel="stylesheet">
   </head>
   <body>
@@ -54,8 +55,25 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
+				<%
+					List<User> list = (List<User>) request.getAttribute("search");
+					if(list!=null){
+						out.println("<table class='table' data-toggle='table' data-striped='true' data-pagination='true' data-page-size='5' data-search='true'><thead><tr><th data-align='center' data-sortable='true'>Email</th><th data-align='center' data-sortable='true'>Nom</th><th data-align='center' data-sortable='true'>Mot de passe</th><th data-align='center' data-sortable='true'>Adresse</th><th data-align='center' data-sortable='true'>Téléphone</th><th data-align='center' data-sortable='true'>Date de création</th><th data-align='center' data-sortable='true'>Compte actif</th><th data-align='center' data-sortable='true'>Administrateur</th><th data-align='center'>Action</th></tr></thead>");
+						Iterator<User> it = list.iterator();
+						while(it.hasNext()){
+							User u = (User) it.next();
+							out.println("<tr><td >"+u.getEmail()+"</td><td >"+u.getName()+"</td><td >"+u.getPwd()+"</td><td >"+u.getAddress()+"</td><td >"+u.getTel()+"</td><td >"+u.getCreationDate()+"</td><td >"+u.getAccountStatus()+"</td><td >"+u.getIsAdmin()+"</td>");
+							out.println("<td><a class='btn btn-success' href='UserManager?action=view&email="+u.getEmail()+"'>Visualiser</a>");
+							out.println("<a class='btn btn-info' href='UserManager?action=startmodif&email="+u.getEmail()+"'>Modifier</a>");
+							out.println("<a class='btn btn-danger' href='UserManager?action=delete&email="+u.getEmail()+"'>Supprimer</a></td></tr>");
+						}
+						out.println("</table>");
+					}
+				%>
+			</div>
+			<div class="col-lg-offset-2 col-lg-8">
 				<h2>Ajouter un utilisateur</h2>
-				<form method="get" action="UserManager" class="col-lg-offset-3 col-lg-6">
+				<form method="get" action="UserManager" class="col-lg-10">
 					<div class="form-group">
 						<label for="mail">Email</label>
 						<input type="text" class="form-control" id="mail" value="<%=usr.getEmail().isEmpty()?'"':usr.getEmail()+'"'+" disabled" %> name="email">
@@ -90,11 +108,12 @@
 						<input type="submit" class="btn btn-primary" value="Enregistrer">
 					</div>	
 				</form>
-				<div class="col-lg-offset-3 col-lg-6 alert alert-success" <%=result %>>
+				<div class="col-lg-6 alert alert-success" <%=result %>>
 					Ajout de l'utilisateur <%=request.getParameter("email") %> réussie !
 				</div>
 			</div>
-			<div class="col-lg-12">
+			</div>	
+			<!-- <div class="col-lg-12">
 				<h2>Rechercher un utilisateur</h2>
 				<form method="get" action="UserManager" class="col-lg-offset-4 col-lg-6">
 					<div class="form-group">
@@ -114,26 +133,9 @@
 						<input type="submit" class="btn btn-primary" value="Chercher">
 					</div>	
 				</form>
+			</div> -->
 			</div>
-			<div class="col-lg-12">
-				<%
-					List<User> list = (List<User>) request.getAttribute("search");
-					if(list!=null){
-						out.println("<div class='col-lg-12'><br></div><h4>Résultats</h4>");
-						out.println("<table class='table'><tr><th align=center>Email</th><th align=center>Nom</th><th align=center>Mot de passe</th><th align=center>Adresse</th><th align=center>Téléphone</th><th align=center>Date de création</th><th align=center>Compte actif</th><th align=center>Administrateur</th><th align=center>Action</th></tr>");
-						Iterator<User> it = list.iterator();
-						while(it.hasNext()){
-							User u = (User) it.next();
-							out.println("<tr><td align=center>"+u.getEmail()+"</td><td align=center>"+u.getName()+"</td><td align=center>"+u.getPwd()+"</td><td align=center>"+u.getAddress()+"</td><td align=center>"+u.getTel()+"</td><td align=center>"+u.getCreationDate()+"</td><td align=center>"+u.getAccountStatus()+"</td><td align=center>"+u.getIsAdmin()+"</td>");
-							out.println("<td><a class='btn btn-success' href='UserManager?action=view&email="+u.getEmail()+"'>Visualiser</a>");
-							out.println("<a class='btn btn-info' href='UserManager?action=startmodif&email="+u.getEmail()+"'>Modifier</a>");
-							out.println("<a class='btn btn-danger' href='UserManager?action=delete&email="+u.getEmail()+"'>Supprimer</a></td></tr>");
-						}
-						out.println("</table>");
-					}
-				%>
-			</div>
-			<div class="col-lg-offset-4 col-lg-4 centered">
+			<%-- <div class="col-lg-offset-4 col-lg-4 centered">
 			<nav>
   				<ul class="pagination">
   				<%
@@ -148,9 +150,12 @@
   				%>
   			</ul>
   			</nav>
-		</div>
-    </div>
-    <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-2.1.1.min.js"></script>
+		</div> --%>
+		
+		
+	<script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.11.2.min.js"></script>
     <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-table.js"></script>
+    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-table-fr-FR.js"></script>
   </body>
 </html>

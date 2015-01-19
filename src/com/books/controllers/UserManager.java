@@ -201,6 +201,10 @@ public class UserManager extends HttpServlet {
 		 * accueil du menu
 		 */
 		if(action.equals("index")){
+			
+			Session sess = HibernateUtil.getSessionFactory().openSession();
+			List<User> list = sess.createCriteria(User.class).list();
+			request.setAttribute("search", list);
 			request.getRequestDispatcher("./admin/user_mgmt.jsp").forward(request, response);
 		}
 	}

@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-table.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/index.css" rel="stylesheet">
   </head>
   <body>
@@ -44,7 +45,7 @@
 	</header>
 	${result }
 	<div class="container">
-		<div class="col-lg-12">
+		<!-- <div class="col-lg-12">
 			<h3>Rechercher par utilisateur</h3>
 			<form method="get" action="EvalManager">
 				<div class="form-group">
@@ -53,10 +54,10 @@
 				<input class="btn btn-primary" type="submit"/>
 				</div>
 			</form>
-		</div>
+		</div> -->
 		<div class="col-lg-12">
-			<table class="table">
-				<tr><th align=center>Utilisateur</th><th align=center>Livre</th><th align=center>Qualité</th><th align=center>Intérêt pour le sujet</th><th align=center>Désir de continuer</th><th align=center>Lire du même auteur</th><th align=center>Recommander à un ami</th><th align=center>Score</th><th align=center>Validée</th><th align=center>Action</th></tr>
+			<table class='table' data-toggle='table' data-striped='true' data-pagination='true' data-page-size='5' data-search='true'>
+				<thead><tr><th data-align="center" data-sortable='true'>Utilisateur</th><th data-align="center" data-sortable='true'>Livre</th><th data-align="center" data-sortable='true'>Qualité</th><th data-align="center" data-sortable='true'>Intérêt<br>pour le sujet</th><th data-align="center" data-sortable='true'>Désir de continuer</th><th data-align="center" data-sortable='true'>Lire du même auteur</th><th data-align="center" data-sortable='true'>Recommander<br>à un ami</th><th data-align="center" data-sortable='true'>Score</th><th data-align="center" data-sortable='true'>Validée</th><th data-align="center">Action</th></tr></thead>
 				<%
 					if(list!=null){
 						while(it.hasNext()){
@@ -73,7 +74,9 @@
 		</div>
 	</div>
 	
-	<script src="bootstrap/js/jquery-2.1.1.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.11.2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-table.js"></script>
+    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-table-fr-FR.js"></script>
   </body>
 </html>

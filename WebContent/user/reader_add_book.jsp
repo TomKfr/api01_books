@@ -92,11 +92,20 @@
 				<%
 					if(!books.isEmpty()){
 						out.println("<div class='col-lg-12'><br></div><h4>Résultats</h4>");
-						out.println("<table class='table'><tr><th align=center>ISBN</th><th align=center>Titre</th><th align=center>Auteur</th><th align=center>Genre</th><th align=center>Action</th></tr>");
+						out.println("<table data-toggle='table' data-striped='true' data-pagination='true'>"+
+							"<thead><tr><th align='center' data-field='isbn'>ISBN</th>"+
+							"<th align='center' data-field='titre' data-sortable='true'>Titre</th>"+
+							"<th align='center' data-field='auteur' data-sortable='true'>Auteur</th>"+
+							"<th align='center' data-field='genre' data-sortable='true'>Genre</th>"+
+							"<th align='center' data-field='action'>Action</th></thead>");
 						while(it.hasNext()){
 							Books bk = (Books) it.next();
-							out.println("<tr><td align=center>"+bk.getIsbn()+"</td><td align=center>"+bk.getTitre()+"</td><td align=center>"+bk.getAuteur()+"</td><td align=center>"+bk.getGenre()+"</td>");
-							out.println("<td align=center><a class='btn btn-info' href='EvalManager?action=initeval&isbn="+bk.getIsbn()+"'>Evaluer</a></td></tr>");
+							out.println("<tr><td align=center>"+bk.getIsbn()+
+									"</td><td align=center>"+bk.getTitre()+
+									"</td><td align=center>"+bk.getAuteur()+
+									"</td><td align=center>"+bk.getGenre()+"</td>");
+							out.println("<td align=center><a class='btn btn-info' href='EvalManager?action=initeval&isbn="
+								+bk.getIsbn()+"'>Evaluer</a></td></tr>");
 						}
 						out.println("</table>");
 					}
@@ -104,9 +113,8 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	<script src="${pageContext.request.contextPath}/bootstrap/js/jquery-2.1.1.min.js"></script>
+
+	<script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.11.2.min.js"></script>
     <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-table.js"></script>
     <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-table-fr-FR.js"></script>

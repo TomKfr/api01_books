@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-table.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/index.css" rel="stylesheet">
   </head>
   <body>
@@ -57,15 +58,15 @@
 			<a href="MatchManager?action=updateall" class="btn btn-danger">Tout mettre à jour !</a>
 		</div>
 		<div class="col-lg-12">
-			<table class="table">
-				<tr><th align=center>Utilisateur</th><th align=center>Livre</th><th align=center>Utilisateur le plus proche</th><th align=center>Utilisateur le plus éloigné</th><th align=center>Action</th></tr>
+			<table class='table' data-toggle='table' data-striped='true' data-pagination='true' data-page-size='10' data-search='true'>
+				<thead><tr><th data-align="center" data-sortable='true'>Utilisateur</th><th data-align="center" data-sortable='true'>Livre</th><th data-align="center" data-sortable='true'>Utilisateur le plus proche</th><th data-align="center" data-sortable='true'>Utilisateur le plus éloigné</th><th data-align="center">Action</th></tr></thead>
 				<%
 					if(list!=null){
 						Iterator<Tmatch> it = list.iterator();
 						while(it.hasNext()){
 							Tmatch m = it.next();
 							%>
-							<tr><td align=center><%=m.getUser() %></td><td align=center><%=m.getBook() %></td><td align=center><%=m.getClosestuser() %></td><td align=center><%=m.getFarthestuser() %></td><td align=center><a href="MatchManager?action=delete&num=<%=m.getNum() %>" class="btn btn-danger">Supprimer</a></td></tr>
+							<tr><td><%=m.getUser() %></td><td><%=m.getBook() %></td><td><%=m.getClosestuser() %></td><td><%=m.getFarthestuser() %></td><td><a href="MatchManager?action=delete&num=<%=m.getNum() %>" class="btn btn-danger">Supprimer</a></td></tr>
 							<%
 						}
 					}
@@ -73,7 +74,9 @@
 			</table>
 		</div>
 	</div>
-	<script src="${pageContext.request.contextPath}/bootstrap/js/jquery-2.1.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.11.2.min.js"></script>
     <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-table.js"></script>
+    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-table-fr-FR.js"></script>
   </body>
 </html>
