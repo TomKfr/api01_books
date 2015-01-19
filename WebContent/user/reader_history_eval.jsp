@@ -47,7 +47,7 @@
 	</header>
 	<div class="col-lg-12">
 		<table class="table">
-			<tr><th>Numéro</th><th>Livre</th><th>Qualité</th><th>Intérêt</th><th>Désir de poursuivre</th><th>Même auteur</th><th>Recommandé</th><th>Score</th></tr>
+			<tr><th align=center>Numéro</th><th align=center>Livre</th><th align=center>Qualité</th><th align=center>Intérêt pour le sujet</th><th align=center>Désir de lire jusqu'à la fin</th><th align=center>Lire du même auteur</th><th align=center>Recommander à un ami</th><th align=center>Score</th></tr>
 			<%
 				if(eval!=null){
 				while(it.hasNext()){

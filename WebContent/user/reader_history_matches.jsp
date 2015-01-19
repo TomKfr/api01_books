@@ -47,7 +47,7 @@
 	<div> <% out.println("<a href='MatchesHistory?action=update"+"' class='btn btn-primary'> Demander une MAJ</a> "); %>
 	<div class="col-lg-offset-2 col-lg-8">
 		<table class="table">
-			<tr><th>Numéro</th><th>Plus proche </th><th>Plus éloigné</th><th>Livre</th></tr>
+			<tr><th align=center>Numéro</th><th align=center>Plus proche </th><th align=center>Plus éloigné</th><th align=center>Livre</th></tr>
 			<%
 				if(match!=null){
 				while(it.hasNext()){

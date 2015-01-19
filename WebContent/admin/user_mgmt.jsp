@@ -120,7 +120,7 @@
 					List<User> list = (List<User>) request.getAttribute("search");
 					if(list!=null){
 						out.println("<div class='col-lg-12'><br></div><h4>Résultats</h4>");
-						out.println("<table class='table'><tr><th>Email</th><th>Nom</th><th>Mot de passe</th><th>Adresse</th><th>Téléphone</th><th>Date de création</th><th>Compte actif</th><th>Administrateur</th><th>Action</th></tr>");
+						out.println("<table class='table'><tr><th align=center>Email</th><th align=center>Nom</th><th align=center>Mot de passe</th><th align=center>Adresse</th><th align=center>Téléphone</th><th align=center>Date de création</th><th align=center>Compte actif</th><th align=center>Administrateur</th><th align=center>Action</th></tr>");
 						Iterator<User> it = list.iterator();
 						while(it.hasNext()){
 							User u = (User) it.next();
