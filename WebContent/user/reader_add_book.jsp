@@ -12,6 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-table.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/index.css" rel="stylesheet">
   </head>
   <body>
@@ -91,7 +92,7 @@
 				<%
 					if(!books.isEmpty()){
 						out.println("<div class='col-lg-12'><br></div><h4>Résultats</h4>");
-						out.println("<table class='table'><tr><th>ISBN</th><th>Titre</th><th>Auteur</th><th>Genre</th><th>Action</th></tr>");
+						out.println("<table class='table' data-toggle='table' data-pagination='true' data-search='true'><tr><th>ISBN</th><th>Titre</th><th>Auteur</th><th>Genre</th><th>Action</th></tr>");
 						while(it.hasNext()){
 							Books bk = (Books) it.next();
 							out.println("<tr><td align=center>"+bk.getIsbn()+"</td><td align=center>"+bk.getTitre()+"</td><td align=center>"+bk.getAuteur()+"</td><td align=center>"+bk.getGenre()+"</td>");
@@ -105,7 +106,9 @@
 	</div>
 	
 	
-	<script src="../bootstrap/js/jquery-2.1.1.min.js"></script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/bootstrap/js/jquery-2.1.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-table.js"></script>
+    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap-table-fr-FR.js"></script>
   </body>
 </html>
