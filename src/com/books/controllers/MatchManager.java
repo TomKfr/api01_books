@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import com.books.model.Evaluation;
 import com.books.model.Tmatch;
@@ -165,7 +166,7 @@ public class MatchManager extends HttpServlet {
 		Session sess = HibernateUtil.getSessionFactory().openSession();
 		sess.beginTransaction();
 		
-		List<Evaluation> list = sess.createCriteria(Evaluation.class).list();
+		List<Evaluation> list = sess.createCriteria(Evaluation.class).add(Restrictions.eq("isvalidated", true)).list();
 		System.out.println("nombre d'evals : "+list.size());
 		Iterator<Evaluation> it = list.iterator();
 		

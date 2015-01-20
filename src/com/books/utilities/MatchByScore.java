@@ -38,7 +38,7 @@ public class MatchByScore implements MatchingAlgo {
 		this.book = eval.getBook();
 		
 		Session sess = HibernateUtil.getSessionFactory().openSession();
-		List<Evaluation> list = sess.createCriteria(Evaluation.class).add(Restrictions.eq("book", this.book)).add(Restrictions.not(Restrictions.eq("user", user))).list();
+		List<Evaluation> list = sess.createCriteria(Evaluation.class).add(Restrictions.eq("book", this.book)).add(Restrictions.not(Restrictions.eq("user", user))).add(Restrictions.eq("isvalidated", true)).list();
 		if(list.size()>0){
 			Double score = eval.getScore();
 			Iterator<Evaluation> it = list.iterator();

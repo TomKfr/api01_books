@@ -95,7 +95,7 @@ public class UserManager extends HttpServlet {
 				sess.getTransaction().commit();
 				sess.close();
 				
-				request.getRequestDispatcher("./admin/user_mgmt.jsp").forward(request, response);
+				request.getRequestDispatcher("UserManager?action=index").forward(request, response);
 			}
 		}
 		/**

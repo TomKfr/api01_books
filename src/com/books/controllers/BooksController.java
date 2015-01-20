@@ -132,18 +132,18 @@ public class BooksController extends HttpServlet {
 						
 			if(!request.getParameter("isbn").isEmpty()){
 				
-				list = sess.createCriteria(Books.class)
-									.add(Restrictions.eq("isbn", request.getParameter("isbn")))
-									.add(Restrictions.not(Restrictions.in("isbn", deja_eval)))
-									.list();
+				Criteria crit = sess.createCriteria(Books.class)
+									.add(Restrictions.eq("isbn", request.getParameter("isbn")));
+				if(!deja_eval.isEmpty()) crit.add(Restrictions.not(Restrictions.in("isbn", deja_eval)));
+				list = crit.list();
 				System.out.println("recherche par isbn : "+request.getParameter("isbn"));
 			}
 			else{
 				
-				list = sess.createCriteria(Books.class)
-							.add(Restrictions.like("titre", "%"+request.getParameter("titre")+"%"))
-							.add(Restrictions.not(Restrictions.in("isbn", deja_eval)))
-							.list();
+				Criteria crit = sess.createCriteria(Books.class)
+							.add(Restrictions.like("titre", "%"+request.getParameter("titre")+"%"));
+				if(!deja_eval.isEmpty()) crit.add(Restrictions.not(Restrictions.in("isbn", deja_eval)));
+				list = crit.list();
 				System.out.println("recherche par titre : "+request.getParameter("titre"));
 			}
 			
